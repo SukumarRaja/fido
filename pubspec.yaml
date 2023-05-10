@@ -12,6 +12,8 @@ dependencies:
   get: ^4.6.5
   shared_preferences: ^2.1.1
   carousel_slider: ^4.2.1
+  flutter_svg: ^2.0.5
+  flutter_staggered_grid_view: ^0.6.2
 
 dev_dependencies:
   flutter_test:
@@ -22,6 +24,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/svgs/
     - assets/flags/
   fonts:
     - family: 'bold'

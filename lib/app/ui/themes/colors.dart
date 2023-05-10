@@ -7,4 +7,6 @@ class AppColors {
   static const black = Color.fromRGBO(0, 0, 0, 1.0);
   static const grey = Color.fromRGBO(194, 194, 203, 1.0);
   static const red = Color.fromRGBO(255, 0, 0, 1.0);
+  static const shoppingMenu = Color.fromRGBO(177, 191, 242, 1.0);
+  static const shoppingMenuSelected = Color.fromRGBO(69, 48, 179, 1.0);
 }

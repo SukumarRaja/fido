@@ -6,8 +6,10 @@ import 'package:fido/app/ui/widgets/common/common_textform.dart';
 import 'package:fido/app/ui/widgets/common/text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../themes/curve/main_curve.dart';
-import '../../widgets/intl_phone_field.dart';
+import '../themes/curve/main_curve.dart';
+import '../widgets/intl_phone_field.dart';
+import '../widgets/main_clip_path.dart';
+import 'password/forgot.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -71,18 +73,7 @@ class Login extends StatelessWidget {
               children: [
                 Stack(
                   children: [
-                    ClipPath(
-                      clipper: MainCurve(),
-                      child: Container(
-                        height: 140,
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(colors: [
-                            AppColors.secondary,
-                            AppColors.secondary
-                          ]),
-                        ),
-                      ),
-                    ),
+                    const MainClipPath(),
                     Obx(() => AuthController.to.isLogin == false
                         ? GestureDetector(
                             onTap: () {
@@ -240,13 +231,20 @@ class Login extends StatelessWidget {
         Container(
             alignment: Alignment.bottomRight,
             margin: const EdgeInsets.only(right: 15.0),
-            child: CommonText(text: "Forgot Password ?", style: regularText())),
+            child: GestureDetector(
+                onTap: () {
+                  Get.toNamed('/forgot');
+                },
+                child: CommonText(
+                    text: "Forgot Password ?", style: regularText()))),
         Container(
           alignment: Alignment.center,
           margin: const EdgeInsets.only(top: 50),
           child: CommonButton(
             text: "Login",
-            onTap: () {},
+            onTap: () {
+              Get.toNamed('/homeMain');
+            },
           ),
         ),
         const SizedBox(height: 15.0),

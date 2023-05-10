@@ -10,12 +10,30 @@ class AuthController extends GetxController {
   final TextEditingController lEmail = TextEditingController();
   final TextEditingController lPassword = TextEditingController();
 
+  //verify email
+  final TextEditingController vEmail = TextEditingController();
+
+  //reset password
+  final TextEditingController uPassword = TextEditingController();
+  final TextEditingController cuPassword = TextEditingController();
+
+
+
+
   final _isLogin = true.obs;
 
   get isLogin => _isLogin.value;
 
   set isLogin(value) {
     _isLogin.value = value;
+  }
+
+  final _isNavigateOtpPage = false.obs;
+
+  get isNavigateOtpPage => _isNavigateOtpPage.value;
+
+  set isNavigateOtpPage(value) {
+    _isNavigateOtpPage.value = value;
   }
 
   loginCheck() async {

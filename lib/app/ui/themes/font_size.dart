@@ -13,8 +13,8 @@ headText(
   );
 }
 
-regularText() {
-  return const TextStyle(fontFamily: 'regular', fontSize: 14);
+regularText({Color color = AppColors.black}) {
+  return TextStyle(fontFamily: 'regular', fontSize: 14, color: color);
 }
 
 boldText({Color color = AppColors.black}) {
