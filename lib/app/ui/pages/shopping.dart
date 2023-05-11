@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:fido/app/controller/shopping.dart';
+import 'package:fido/app/ui/pages/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -37,10 +38,15 @@ class Shopping extends StatelessWidget {
                     children: [
                       Stack(
                         children: [
-                          const Icon(
-                            Icons.shopping_cart_sharp,
-                            color: AppColors.white,
-                            size: 30,
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(() => Cart());
+                            },
+                            child: const Icon(
+                              Icons.shopping_cart_sharp,
+                              color: AppColors.white,
+                              size: 30,
+                            ),
                           ),
                           Positioned(
                             right: 0,

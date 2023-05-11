@@ -13,12 +13,12 @@ headText(
   );
 }
 
-regularText({Color color = AppColors.black}) {
-  return TextStyle(fontFamily: 'regular', fontSize: 14, color: color);
+regularText({Color color = AppColors.black,double fontSize = 14}) {
+  return TextStyle(fontFamily: 'regular', fontSize: fontSize, color: color);
 }
 
-boldText({Color color = AppColors.black}) {
-  return TextStyle(fontSize: 24, fontFamily: 'bold', color: color);
+boldText({Color color = AppColors.black,double fontSize = 24}) {
+  return TextStyle(fontSize: fontSize, fontFamily: 'bold', color: color);
 }
 
 mediumText({Color color = AppColors.black, double fontSize = 16}) {
