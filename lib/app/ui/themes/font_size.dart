@@ -13,11 +13,18 @@ headText(
   );
 }
 
-regularText({Color color = AppColors.black,double fontSize = 14}) {
-  return TextStyle(fontFamily: 'regular', fontSize: fontSize, color: color);
+regularText(
+    {Color color = AppColors.black,
+    double fontSize = 14,
+    bool lineThrough = false}) {
+  return TextStyle(
+      fontFamily: 'regular',
+      fontSize: fontSize,
+      color: color,
+      decoration: lineThrough == true ? TextDecoration.lineThrough : null);
 }
 
-boldText({Color color = AppColors.black,double fontSize = 24}) {
+boldText({Color color = AppColors.black, double fontSize = 24}) {
   return TextStyle(fontSize: fontSize, fontFamily: 'bold', color: color);
 }
 
