@@ -44,7 +44,7 @@ class _CommonTextFormFieldState extends State<CommonTextFormField> {
             fillColor: AppColors.white,
             hintText: widget.hintText,
             errorText: widget.errorText,
-            hintStyle: const TextStyle(fontFamily: "medium"),
+            hintStyle: const TextStyle(fontFamily: "medium",color: AppColors.hintext),
             counterText: "",
             contentPadding: const EdgeInsets.only(left: 15),
             enabledBorder: OutlineInputBorder(

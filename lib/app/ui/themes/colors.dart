@@ -11,4 +11,5 @@ class AppColors {
   static const shoppingMenuSelected = Color.fromRGBO(69, 48, 179, 1.0);
   static const cartIncrementBox = Color.fromRGBO(130, 115, 102, 1.0);
   static const free = Color.fromRGBO(6, 161, 31, 1.0);
+  static const hintext = Color.fromRGBO(89, 97, 91, 1.0);
 }

@@ -1,3 +1,13 @@
+import 'package:fido/app/controller/pet.dart';
+import 'package:fido/app/controller/pet.dart';
+import 'package:fido/app/controller/pet.dart';
+import 'package:fido/app/controller/pet.dart';
+import 'package:fido/app/controller/pet.dart';
+import 'package:fido/app/controller/pet.dart';
+import 'package:fido/app/controller/pet.dart';
+import 'package:fido/app/controller/pet.dart';
+import 'package:fido/app/controller/pet.dart';
+import 'package:fido/app/controller/pet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/shopping.dart';
@@ -71,6 +81,84 @@ shoppingPopupMenu(BuildContext context) {
     elevation: 2.0,
   );
 }
+petPopupMenu(BuildContext context) {
+  showMenu(
+    color: AppColors.white,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(8.0),
+      ),
+    ),
+    context: context,
+    position: const RelativeRect.fromLTRB(25.0, 120.0, 10.0, 0.0),
+    items: [
+      PopupMenuItem(
+        child: buildPetText(text: "Dog", index: 0),
+        onTap: () {
+          PetController.to.petPopMenuIndex = 0;
+          PetController.to.mainMenuIndexForDog = 0;
+          PetController.to.petTypeName = "Dog";
+          //
+          // DriverController.to.getRideHistory();
+        },
+      ),
+      PopupMenuItem(
+        child: buildPetText(text: "Cat", index: 1),
+        onTap: () {
+          PetController.to.petPopMenuIndex = 1;
+          PetController.to.mainMenuIndexForCat = 0;
+          PetController.to.petTypeName = "Cat";
+
+
+          // DriverController.to.rideStatus = "close";
+          //
+          // DriverController.to.getRideHistory();
+        },
+      ),
+      PopupMenuItem(
+        child: buildPetText(text: "Birds", index: 2),
+        onTap: () {
+          PetController.to.petPopMenuIndex = 2;
+          PetController.to.mainMenuIndexForBirds = 0;
+          PetController.to.petTypeName = "Birds";
+
+
+          // DriverController.to.rideStatus = "close";
+          //
+          // DriverController.to.getRideHistory();
+        },
+      ),
+      PopupMenuItem(
+        child: buildPetText(text: "Fish & Aquatics", index: 3),
+        onTap: () {
+          PetController.to.petPopMenuIndex = 3;
+          PetController.to.mainMenuIndexForFishAndAquatics = 0;
+          PetController.to.petTypeName = "Fish & Aquatics";
+
+
+          // DriverController.to.rideStatus = "close";
+          //
+          // DriverController.to.getRideHistory();
+        },
+      ),
+      PopupMenuItem(
+        child: buildPetText(text: "Small Pets", index: 4),
+        onTap: () {
+          PetController.to.petPopMenuIndex = 4;
+          PetController.to.mainMenuIndexForSmallPets = 0;
+          PetController.to.petTypeName = "Small Pets";
+
+
+          // DriverController.to.rideStatus = "close";
+          //
+          // DriverController.to.getRideHistory();
+        },
+      ),
+    ],
+    elevation: 2.0,
+  );
+}
+
 //
 // notificationPopupMenu(BuildContext context) {
 //   showMenu(
@@ -166,6 +254,27 @@ Center buildShoppingText({required String text, required index}) {
               text,
               style: TextStyle(
                   color: ShoppingController.to.shoppingPopMenuIndex == index
+                      ? AppColors.white
+                      : AppColors.black),
+            ),
+          ),
+        )),
+  );
+}
+Center buildPetText({required String text, required index}) {
+  return Center(
+    child: Obx(() => Container(
+          height: 30,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8.0),
+              color: PetController.to.petPopMenuIndex == index
+                  ? AppColors.primary
+                  : AppColors.grey.withOpacity(.3)),
+          child: Center(
+            child: Text(
+              text,
+              style: TextStyle(
+                  color: PetController.to.petPopMenuIndex == index
                       ? AppColors.white
                       : AppColors.black),
             ),
