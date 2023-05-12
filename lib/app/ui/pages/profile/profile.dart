@@ -1,4 +1,6 @@
+import 'package:fido/app/ui/pages/pets/add_pet.dart';
 import 'package:fido/app/ui/pages/pets/my_pets.dart';
+import 'package:fido/app/ui/pages/profile/edit_profile.dart';
 import 'package:fido/app/ui/pages/profile/notification.dart';
 import 'package:fido/app/ui/widgets/profile/profilemenu_tile.dart';
 import 'package:flutter/material.dart';
@@ -47,17 +49,22 @@ class Profile extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 10),
-                      Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: NetworkImage(
-                                "https://resize.indiatvnews.com/en/resize/newbucket/730_-/2023/01/PTI01_10_2023_000229B.jpg",
-                              ),
-                            )),
+                      GestureDetector(
+                        onTap: (){
+                          Get.to(()=>EditProfilePage());
+                        },
+                        child: Container(
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: NetworkImage(
+                                  "https://resize.indiatvnews.com/en/resize/newbucket/730_-/2023/01/PTI01_10_2023_000229B.jpg",
+                                ),
+                              )),
+                        ),
                       ),
                     ],
                   ),
@@ -184,12 +191,20 @@ class Profile extends StatelessWidget {
                   ProfileMenuTile(
                     icon: Icons.credit_card_outlined,
                     text: "Payment",
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(()=>InitialPetAdd());
+                    },
                   ),
                   SizedBox(height: 5),
                   ProfileMenuTile(
                     icon: Icons.location_on_outlined,
                     text: "My Address",
+                    onTap: () {},
+                  ),
+                  SizedBox(height: 5),
+                  ProfileMenuTile(
+                    icon: Icons.sell_outlined,
+                    text: "Pet for Sale/Adoption",
                     onTap: () {},
                   ),
                   SizedBox(height: 15),
