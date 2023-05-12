@@ -1,5 +1,6 @@
 import 'package:fido/app/ui/themes/font_size.dart';
 import 'package:fido/app/ui/widgets/cart/cartitem.dart';
+import 'package:fido/app/ui/widgets/common/button.dart';
 import 'package:fido/app/ui/widgets/common/text.dart';
 import 'package:fido/app/ui/widgets/main_clip_path.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,8 @@ class Cart extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 30.0),
-                    child: Row(
+                    child:
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Icon(
@@ -59,7 +61,7 @@ class Cart extends StatelessWidget {
               SizedBox(height: 15),
               Container(
                 padding: EdgeInsets.all(12),
-                height: Get.height * 0.45,
+                height: Get.height * 0.48,
                 width: Get.width * 0.9,
                 decoration: BoxDecoration(
                   color: AppColors.white,
@@ -93,7 +95,8 @@ class Cart extends StatelessWidget {
                             image: DecorationImage(
                               fit: BoxFit.fill,
                               image: NetworkImage(
-                                  "https://i.stack.imgur.com/HILmr.png"),
+                                "https://i.stack.imgur.com/HILmr.png",
+                              ),
                             ),
                           ),
                         ),
@@ -184,7 +187,39 @@ class Cart extends StatelessWidget {
                         ),
                         SizedBox(width: 10),
                       ],
-                    )
+                    ),
+                    // SizedBox(height: 20),
+                    Divider(
+                      height: 50,
+                      thickness: 1,
+                      color: AppColors.black,
+                    ),
+
+                    Row(
+                      children: [
+                        CommonText(
+                          text: "Total",
+                          style: boldText(
+                            fontSize: 14,
+                          ),
+                        ),
+                        Spacer(),
+                        CommonText(
+                          text: "Rs. 339",
+                          style: boldText(
+                            fontSize: 14,
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Center(
+                      child: CommonButton(
+                        text: "Continue to Checkout",
+                        onTap: () {},
+                      ),
+                    ),
                   ],
                 ),
               ),

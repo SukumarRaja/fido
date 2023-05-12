@@ -23,6 +23,7 @@ class CartItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(8),
+      margin: EdgeInsets.all(5),
       height: Get.height * 0.15,
       width: Get.width * 0.9,
       decoration: BoxDecoration(

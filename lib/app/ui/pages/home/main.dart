@@ -3,6 +3,7 @@ import 'package:fido/app/ui/pages/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../themes/colors.dart';
+import '../profile/profile.dart';
 import '../shopping.dart';
 
 class HomeMain extends StatelessWidget {
@@ -12,7 +13,7 @@ class HomeMain extends StatelessWidget {
     Container(),
     Shopping(),
     Cart(),
-    Container(),
+    Profile(),
   ];
 
   @override
