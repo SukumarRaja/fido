@@ -27,27 +27,22 @@ class Shopping extends StatelessWidget {
           Stack(
             children: [
               const MainClipPath(),
-              GestureDetector(
-                onTap: () {
-                  Get.back();
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 15.0, vertical: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Stack(
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 15.0, vertical: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed('/cart');
+                      },
+                      child: Stack(
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(() => const Cart());
-                            },
-                            child: const Icon(
-                              Icons.shopping_cart_sharp,
-                              color: AppColors.white,
-                              size: 30,
-                            ),
+                          const Icon(
+                            Icons.shopping_cart_sharp,
+                            color: AppColors.white,
+                            size: 30,
                           ),
                           Positioned(
                             right: 0,
@@ -67,10 +62,15 @@ class Shopping extends StatelessWidget {
                           )
                         ],
                       ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Stack(
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed('/wish_list');
+                      },
+                      child: Stack(
                         children: [
                           const Icon(
                             Icons.favorite,
@@ -94,9 +94,9 @@ class Shopping extends StatelessWidget {
                             ),
                           )
                         ],
-                      )
-                    ],
-                  ),
+                      ),
+                    )
+                  ],
                 ),
               ),
               Obx(() => ShoppingController.to.dogFoodCategoriesIndex != 200
@@ -124,7 +124,15 @@ class Shopping extends StatelessWidget {
                                                 .to.dogFoodCategoriesIndex ==
                                             1
                                         ? "Wed Food"
-                                        : "Puppy Food",
+                                        : ShoppingController.to
+                                                    .dogFoodCategoriesIndex ==
+                                                2
+                                            ? "Treats"
+                                            : ShoppingController.to
+                                                        .dogFoodCategoriesIndex ==
+                                                    3
+                                                ? "Supplements"
+                                                : "Biscuits",
                                 style: boldText(
                                     color: AppColors.white, fontSize: 20))
                           ],
@@ -150,6 +158,7 @@ class Shopping extends StatelessWidget {
                     print(
                         "shoppingPopup index ${ShoppingController.to.shoppingPopMenuIndex}");
                     shoppingPopupMenu(context);
+                    ShoppingController.to.dogFoodCategoriesIndex = 200;
                   },
                   icon: const Icon(
                     Icons.filter_list,
@@ -200,11 +209,11 @@ class Shopping extends StatelessWidget {
   mainMenus() {
     if (ShoppingController.to.shoppingPopMenuIndex == 0) {
       return ListView.builder(
-          itemCount: 4,
+          itemCount: 2,
           shrinkWrap: true,
           itemBuilder: (context, int index) {
             return Obx(() => MainMenuCard(
-                  name: index == 0 ? "Food" : "Cloth",
+                  name: index == 0 ? "Food" : "Grocery",
                   icon: Icons.soup_kitchen_outlined,
                   index: index,
                   controllerIndex: ShoppingController.to.mainMenuIndexForDog,
@@ -216,11 +225,11 @@ class Shopping extends StatelessWidget {
           });
     } else if (ShoppingController.to.shoppingPopMenuIndex == 1) {
       return ListView.builder(
-          itemCount: 3,
+          itemCount: 2,
           shrinkWrap: true,
           itemBuilder: (context, int index) {
             return Obx(() => MainMenuCard(
-                  name: "Cat",
+                  name: index == 0 ? "Food" : "Grocery",
                   icon: Icons.soup_kitchen_outlined,
                   index: index,
                   controllerIndex: ShoppingController.to.mainMenuIndexForCat,
@@ -231,11 +240,17 @@ class Shopping extends StatelessWidget {
           });
     } else if (ShoppingController.to.shoppingPopMenuIndex == 2) {
       return ListView.builder(
-          itemCount: 1,
+          itemCount: 4,
           shrinkWrap: true,
           itemBuilder: (context, int index) {
             return Obx(() => MainMenuCard(
-                  name: "Birds",
+                  name: index == 0
+                      ? "Food &\nCare"
+                      : index == 1
+                          ? "Accessories"
+                          : index == 2
+                              ? "Cages & Stand"
+                              : "Nest  & Box",
                   icon: Icons.soup_kitchen_outlined,
                   index: index,
                   controllerIndex: ShoppingController.to.mainMenuIndexForBirds,
@@ -246,12 +261,19 @@ class Shopping extends StatelessWidget {
           });
     } else if (ShoppingController.to.shoppingPopMenuIndex == 3) {
       return ListView.builder(
-          itemCount: 2,
+          itemCount: 4,
           shrinkWrap: true,
           itemBuilder: (context, int index) {
             return Obx(() => MainMenuCard(
-                  name: "Fish & Aquatics",
+                  name: index == 0
+                      ? "Aquariums Maintenance"
+                      : index == 1
+                          ? "Decorating Items"
+                          : index == 2
+                              ? "Food &\nCare"
+                              : "Aquariums",
                   icon: Icons.soup_kitchen_outlined,
+                  fontSize: 12,
                   index: index,
                   controllerIndex:
                       ShoppingController.to.mainMenuIndexForFishAndAquatics,
@@ -267,7 +289,7 @@ class Shopping extends StatelessWidget {
           shrinkWrap: true,
           itemBuilder: (context, int index) {
             return Obx(() => MainMenuCard(
-                  name: "Small Pets",
+                  name: index == 0 ? "Food" : "Cages",
                   icon: Icons.soup_kitchen_outlined,
                   index: index,
                   controllerIndex:
@@ -330,7 +352,35 @@ class Shopping extends StatelessWidget {
           itemCount: 3,
           itemBuilder: (context, index) {
             return MainCategoryCard(
-              name: "Puppy Food $index",
+              name: "Treats $index",
+              image:
+                  "https://thumbs.dreamstime.com/b/dog-food-pet-animal-bowl-metal-dishware-plate-62553416.jpg",
+              onTap: () {},
+            );
+          },
+        );
+      } else if (ShoppingController.to.dogFoodCategoriesIndex == 3) {
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, crossAxisSpacing: 2, mainAxisSpacing: 2),
+          itemCount: 3,
+          itemBuilder: (context, index) {
+            return MainCategoryCard(
+              name: "Supplements $index",
+              image:
+                  "https://thumbs.dreamstime.com/b/dog-food-pet-animal-bowl-metal-dishware-plate-62553416.jpg",
+              onTap: () {},
+            );
+          },
+        );
+      } else if (ShoppingController.to.dogFoodCategoriesIndex == 4) {
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, crossAxisSpacing: 2, mainAxisSpacing: 2),
+          itemCount: 3,
+          itemBuilder: (context, index) {
+            return MainCategoryCard(
+              name: "Biscuits $index",
               image:
                   "https://thumbs.dreamstime.com/b/dog-food-pet-animal-bowl-metal-dishware-plate-62553416.jpg",
               onTap: () {},
@@ -341,16 +391,20 @@ class Shopping extends StatelessWidget {
         return GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, crossAxisSpacing: 2, mainAxisSpacing: 2),
-          itemCount: 3,
+          itemCount: 5,
           itemBuilder: (context, index) {
             return MainCategoryCard(
               name: index == 0
                   ? "Dry Food"
                   : index == 1
                       ? "Wed Food"
-                      : "Puppy Food",
+                      : index == 2
+                          ? "Treats"
+                          : index == 3
+                              ? "Supplements"
+                              : "Biscuits",
               image:
-                  "https://thumbs.dreamstime.com/b/dog-food-pet-animal-bowl-metal-dishware-plate-62553416.jpg",
+                  "https://bixbipet.com/wp-content/uploads/Bixbi-Rawbble-Dry-Dog-Food.jpg",
               onTap: () {
                 ShoppingController.to.dogFoodCategoriesIndex = index;
               },

@@ -10,13 +10,15 @@ class MainMenuCard extends StatelessWidget {
       required this.icon,
       required this.name,
       required this.onTap,
-      required this.controllerIndex})
+      required this.controllerIndex,
+      this.fontSize = 14})
       : super(key: key);
   final int index;
   final IconData icon;
   final String name;
   final Function() onTap;
   final int controllerIndex;
+  final double fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,9 @@ class MainMenuCard extends StatelessWidget {
             ),
           ),
           CommonText(
-              text: name, style: regularText(color: AppColors.shoppingMenu))
+              text: name,
+              style: regularText(
+                  color: AppColors.shoppingMenu, fontSize: fontSize))
         ],
       ),
     );
