@@ -6,7 +6,7 @@ class MainCurve extends CustomClipper<Path> {
     double height = size.height;
     double width = size.width;
     var path = Path();
-    path.lineTo(0, height - 110);
+    path.lineTo(0, height - 100);
     path.quadraticBezierTo(height - 50, height, width, width / 3.7);
     path.lineTo(width, 0);
     path.close();
