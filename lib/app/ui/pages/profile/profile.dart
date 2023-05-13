@@ -50,8 +50,8 @@ class Profile extends StatelessWidget {
                       ),
                       SizedBox(width: 10),
                       GestureDetector(
-                        onTap: (){
-                          Get.to(()=>EditProfilePage());
+                        onTap: () {
+                          Get.to(() => EditProfilePage());
                         },
                         child: Container(
                           height: 60,
@@ -89,27 +89,32 @@ class Profile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    children: [
-                      Container(
-                        height: 40,
-                        width: 40,
-                        margin: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          shape: BoxShape.circle,
+                  GestureDetector(
+                    onTap: () {
+                      Get.toNamed('/my_orders');
+                    },
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 40,
+                          width: 40,
+                          margin: EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(
+                            Icons.receipt_long_outlined,
+                            color: AppColors.white,
+                            size: 28,
+                          ),
                         ),
-                        child: Icon(
-                          Icons.receipt_long_outlined,
-                          color: AppColors.white,
-                          size: 28,
+                        CommonText(
+                          text: "My Orders",
+                          style: regularText(),
                         ),
-                      ),
-                      CommonText(
-                        text: "My Orders",
-                        style: regularText(),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   Column(
                     children: [
@@ -133,27 +138,32 @@ class Profile extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Column(
-                    children: [
-                      Container(
-                        height: 40,
-                        width: 40,
-                        margin: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          shape: BoxShape.circle,
+                  GestureDetector(
+                    onTap: () {
+                      Get.toNamed('/addresses');
+                    },
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 40,
+                          width: 40,
+                          margin: EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(
+                            Icons.location_on_outlined,
+                            color: AppColors.white,
+                            size: 28,
+                          ),
                         ),
-                        child: Icon(
-                          Icons.location_on_outlined,
-                          color: AppColors.white,
-                          size: 28,
+                        CommonText(
+                          text: "Delivery\nAddress",
+                          style: regularText(),
                         ),
-                      ),
-                      CommonText(
-                        text: "Delivery\nAddress",
-                        style: regularText(),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -184,7 +194,7 @@ class Profile extends StatelessWidget {
                     icon: Icons.pets_outlined,
                     text: "My Pets",
                     onTap: () {
-                      Get.to(()=>MyPets());
+                      Get.to(() => MyPets());
                     },
                   ),
                   SizedBox(height: 5),
@@ -192,14 +202,16 @@ class Profile extends StatelessWidget {
                     icon: Icons.credit_card_outlined,
                     text: "Payment",
                     onTap: () {
-                      Get.to(()=>InitialPetAdd());
+                      Get.to(() => InitialPetAdd());
                     },
                   ),
                   SizedBox(height: 5),
                   ProfileMenuTile(
                     icon: Icons.location_on_outlined,
                     text: "My Address",
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed('/addresses');
+                    },
                   ),
                   SizedBox(height: 5),
                   ProfileMenuTile(

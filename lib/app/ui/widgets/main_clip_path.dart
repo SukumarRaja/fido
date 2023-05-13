@@ -13,7 +13,7 @@ class MainClipPath extends StatelessWidget {
         height: 140,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-              colors: [AppColors.secondary, AppColors.secondary]),
+              colors: [AppColors.primary, AppColors.secondary]),
         ),
       ),
     );

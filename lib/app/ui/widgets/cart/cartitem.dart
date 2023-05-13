@@ -22,89 +22,113 @@ class CartItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8),
-      margin: EdgeInsets.all(5),
-      height: Get.height * 0.15,
-      width: Get.width * 0.9,
+      width: Get.width,
+      margin:
+          const EdgeInsets.only(top: 4.0, bottom: 4.0, right: 8.0, left: 8.0),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: Color(0xFFF6F6F6),
-      ),
+          borderRadius: BorderRadius.circular(8.0),
+          color: AppColors.white,
+          boxShadow: [
+            BoxShadow(
+                color: AppColors.grey.withOpacity(.3),
+                spreadRadius: 1,
+                blurRadius: 1)
+          ]),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
-            height: 70,
-            width: 70,
+            height: 90,
+            width: 90,
+            margin: EdgeInsets.all(10.0),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: AppColors.white,
-              image: DecorationImage(
-                fit: BoxFit.fill,
-                image: NetworkImage("$productImage"),
-              ),
-            ),
+                borderRadius: BorderRadius.circular(10.0),
+                color: AppColors.white,
+                boxShadow: [
+                  BoxShadow(
+                      color: AppColors.grey.withOpacity(.3),
+                      spreadRadius: 1,
+                      blurRadius: 1)
+                ],
+                image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: NetworkImage(
+                        "https://thumbs.dreamstime.com/b/dog-food-pet-animal-bowl-metal-dishware-plate-62553416.jpg"))),
           ),
-          // SizedBox(width: 15),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CommonText(
-                  text: productName,
-                  style: boldText(fontSize: 16, color: AppColors.black),
-                ),
-                CommonText(
-                  text: productDescription,
-                  style: regularText(fontSize: 12),
-                ),
-              ],
-            ),
+          SizedBox(
+            width: 15,
           ),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 25.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  width: Get.width * 0.2,
-                  height: Get.height * 0.02,
-                  decoration: BoxDecoration(
-                      color: AppColors.cartIncrementBox,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Icon(
-                        Icons.remove,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CommonText(text: "Pedigree", style: mediumText()),
+              CommonText(text: "1 kg", style: mediumText(fontSize: 13)),
+              CommonText(text: "Dry Food", style: regularText(fontSize: 12)),
+              SizedBox(
+                height: 20,
+                child: ListView.builder(
+                    itemCount: 5,
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemBuilder: (context, int index) {
+                      return Icon(
+                        Icons.star,
+                        size: 14,
+                        color: AppColors.primary,
+                      );
+                    }),
+              )
+            ],
+          ),
+          Spacer(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(3.0),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4.0),
                         color: AppColors.white,
-                        size: 10,
-                      ),
-                      CommonText(
-                        text: "1",
-                        style: regularText(
-                          color: AppColors.white,
-                          fontSize: 10,
-                        ),
-                      ),
-                      Icon(
-                        Icons.add,
-                        color: AppColors.white,
-                        size: 10,
-                      ),
-                    ],
+                        boxShadow: [
+                          BoxShadow(
+                              color: AppColors.grey.withOpacity(.3),
+                              spreadRadius: 1,
+                              blurRadius: 1)
+                        ]),
+                    child: Icon(
+                      Icons.remove,
+                      size: 15,
+                    ),
                   ),
-                ),
-                SizedBox(),
-                CommonText(
-                    text: productAmount,
-                    style: regularText(color: AppColors.primary))
-              ],
-            ),
+                  SizedBox(width: 8),
+                  CommonText(text: "6", style: mediumText()),
+                  SizedBox(width: 8),
+                  Container(
+                    padding: EdgeInsets.all(3.0),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4.0),
+                        color: AppColors.white,
+                        boxShadow: [
+                          BoxShadow(
+                              color: AppColors.grey.withOpacity(.3),
+                              spreadRadius: 1,
+                              blurRadius: 1)
+                        ]),
+                    child: Icon(
+                      Icons.add,
+                      size: 15,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 15),
+              CommonText(
+                  text: "Rs 236",
+                  style: boldText(fontSize: 16, color: AppColors.primary))
+            ],
           ),
+          SizedBox(width: 15.0)
         ],
       ),
     );

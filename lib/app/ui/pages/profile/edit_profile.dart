@@ -39,6 +39,28 @@ class EditProfilePage extends StatelessWidget {
                         ),
                       ),
                     ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15.0, vertical: 10.0),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.arrow_back_ios_new_outlined,
+                              color: AppColors.white,
+                              size: 18,
+                            ),
+                            CommonText(
+                                text: "Edit Profile",
+                                style: headText(
+                                    color: AppColors.white, fontSize: 20)),
+                          ],
+                        ),
+                      ),
+                    ),
                     Positioned(
                       top: 120,
                       right: 0,
@@ -76,9 +98,9 @@ class EditProfilePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                    Positioned(
+                      right: 15,
+                      top: 15,
                       child: Stack(
                         children: [
                           Container(

@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
+import '../ui/pages/address/list.dart';
 import '../ui/pages/cart.dart';
 import '../ui/pages/home/main.dart';
 import '../ui/pages/login.dart';
 import '../ui/pages/initial.dart';
+import '../ui/pages/my_orders.dart';
 import '../ui/pages/password/forgot.dart';
 import '../ui/pages/password/reset.dart';
 import '../ui/pages/product_detail.dart';
@@ -47,7 +49,17 @@ class AppRoutes {
         transitionDuration: const Duration(seconds: 1)),
     GetPage(
         name: '/product_detail',
-        page: () =>  ProductDetail(),
+        page: () => const ProductDetail(),
+        transition: Transition.circularReveal,
+        transitionDuration: const Duration(seconds: 1)),
+    GetPage(
+        name: '/my_orders',
+        page: () => const MyOrders(),
+        transition: Transition.circularReveal,
+        transitionDuration: const Duration(seconds: 1)),
+    GetPage(
+        name: '/addresses',
+        page: () => const Addresses(),
         transition: Transition.circularReveal,
         transitionDuration: const Duration(seconds: 1)),
   ];

@@ -13,218 +13,217 @@ class Cart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Stack(
-                children: [
-                  const MainClipPath(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 30.0),
-                    child:
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Icon(
-                          Icons.arrow_back_ios_new,
-                          color: AppColors.white,
-                        ),
-                        CommonText(
-                          text: "My Cart",
-                          style: boldText(color: AppColors.white, fontSize: 20),
-                        ),
-                      ],
+    return Material(
+      child: SingleChildScrollView(
+        // physics: NeverScrollableScrollPhysics(),
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 120.0),
+                  child: SizedBox(
+                    height: Get.height * 0.27,
+                    child: ListView.builder(
+                      itemCount: 8,
+                      shrinkWrap: true,
+                      physics: ScrollPhysics(),
+                      itemBuilder: (context, int index) {
+                        return CartItemCard(
+                          productName: "Product Name",
+                          productDescription: "Description\nDescription",
+                          productImage:
+                              "https://thumbs.dreamstime.com/b/dog-food-pet-animal-bowl-metal-dishware-plate-62553416.jpg",
+                          productAmount: 'Rs. 339',
+                        );
+                      },
                     ),
-                  )
-                ],
-              ),
-              Container(
-                height: Get.height * 0.3,
-                child: ListView.builder(
-                  itemCount: 5,
-                  shrinkWrap: true,
-                  itemBuilder: (context, int index) {
-                    return CartItemCard(
-                      productName: "Product Name",
-                      productDescription: "Description\nDescription",
-                      productImage:
-                          "https://thumbs.dreamstime.com/b/dog-food-pet-animal-bowl-metal-dishware-plate-62553416.jpg",
-                      productAmount: 'Rs. 339',
-                    );
-                  },
+                  ),
                 ),
-              ),
-              SizedBox(height: 15),
-              Container(
-                padding: EdgeInsets.all(12),
-                height: Get.height * 0.48,
-                width: Get.width * 0.9,
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.black.withOpacity(0.18),
-                      blurRadius: 5,
-                    ),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CommonText(
-                      text: "Shipping Address",
-                      style: boldText(
-                        fontSize: 14,
-                      ),
-                    ),
-                    SizedBox(height: 15),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: 50,
-                          width: 60,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: NetworkImage(
-                                "https://i.stack.imgur.com/HILmr.png",
-                              ),
-                            ),
-                          ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                MainClipPath(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 15.0, vertical: 10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          // Get.toNamed('/cart');
+                        },
+                        child: Stack(
                           children: [
-                            CommonText(
-                              text: "Deliver to : Home",
-                              style: regularText(
-                                color: AppColors.black,
-                              ),
+                            const Icon(
+                              Icons.shopping_cart_sharp,
+                              color: AppColors.white,
+                              size: 30,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Icons.location_on,
-                                  color: AppColors.primary,
-                                  size: 17,
+                            Positioned(
+                              right: 0,
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 13,
+                                width: 13,
+                                decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AppColors.primary),
+                                child: CommonText(
+                                  text: "2",
+                                  style: mediumText(
+                                      color: AppColors.white, fontSize: 11),
                                 ),
-                                CommonText(
-                                  text: "720,Ram Nagar,RS Puram",
-                                  style: regularText(
-                                    fontSize: 13,
-                                    color: AppColors.grey,
-                                  ),
-                                ),
-                              ],
+                              ),
                             )
                           ],
                         ),
-                        CommonText(
-                          text: "Change",
-                          style: regularText(
-                              color: AppColors.primary, fontSize: 13),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 15),
-                    CommonText(
-                      text: "Price Details",
-                      style: boldText(
-                        fontSize: 14,
                       ),
-                    ),
-                    SizedBox(height: 5),
-                    ListView.builder(
-                        itemCount: 2,
-                        shrinkWrap: true,
-                        itemBuilder: (context, int index) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 5.0),
-                            child: Row(
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Container(
+                width: Get.width,
+                margin: EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    color: AppColors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color: AppColors.grey.withOpacity(.3),
+                          blurRadius: 1,
+                          spreadRadius: 1)
+                    ]),
+                child: Stack(
+                  children: [
+                    Positioned(
+                        right: 15,
+                        top: 50,
+                        child: CommonText(
+                            text: "Change",
+                            style: mediumText(
+                                color: AppColors.primary, fontSize: 14))),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 10.0),
+                          child: CommonText(
+                              text: "Shipping Address",
+                              style: mediumText(fontSize: 18)),
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              height: 70,
+                              width: 80,
+                              margin: EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  color: AppColors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: AppColors.grey.withOpacity(.3),
+                                        spreadRadius: 1,
+                                        blurRadius: 1)
+                                  ],
+                                  image: DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: NetworkImage(
+                                          "https://www.thestatesman.com/wp-content/uploads/2020/04/googl_ED.jpg"))),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CommonText(
-                                  text: "Pedigree",
-                                  style: boldText(
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                Spacer(),
+                                    text: "Deliver to : Home",
+                                    style: mediumText(fontSize: 14)),
                                 CommonText(
-                                  text: "Rs. 339",
-                                  style: regularText(
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                SizedBox(width: 10),
+                                    text:
+                                        "720, Ram Nagar, Rs Puram\nPincode - 641002",
+                                    textAlign: TextAlign.start,
+                                    style: regularText(
+                                        color: AppColors.grey, fontSize: 12)),
                               ],
                             ),
-                          );
-                        }),
-                    SizedBox(height: 5),
-                    Row(
-                      children: [
-                        CommonText(
-                          text: "Delivery Fee",
-                          style: regularText(
-                            color: AppColors.free,
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: CommonText(
+                              text: "Price Details",
+                              style: mediumText(fontSize: 16)),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15.0, vertical: 10.0),
+                          child: ListView.builder(
+                              itemCount: 4,
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, int index) {
+                                return Row(
+                                  children: [
+                                    CommonText(
+                                        text: "Pedgiree",
+                                        style: regularText(fontSize: 14)),
+                                    Spacer(),
+                                    CommonText(
+                                        text: "Rs 339.00",
+                                        style: mediumText(fontSize: 14)),
+                                  ],
+                                );
+                              }),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: Row(
+                            children: [
+                              CommonText(
+                                  text: "Delivery Fees",
+                                  style: regularText(
+                                      fontSize: 15, color: AppColors.green)),
+                              Spacer(),
+                              CommonText(
+                                  text: "Free",
+                                  style: mediumText(
+                                      fontSize: 15, color: AppColors.green)),
+                            ],
                           ),
                         ),
-                        Spacer(),
-                        CommonText(
-                          text: "Free",
-                          style: regularText(
-                            color: AppColors.free,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Divider(
+                            thickness: 1,
+                            color: AppColors.black,
                           ),
                         ),
-                        SizedBox(width: 10),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: Row(
+                            children: [
+                              CommonText(
+                                  text: "Total",
+                                  style: boldText(
+                                      fontSize: 15, color: AppColors.green)),
+                              Spacer(),
+                              CommonText(
+                                  text: "Rs 1362.00",
+                                  style: boldText(
+                                      fontSize: 15, color: AppColors.green)),
+                            ],
+                          ),
+                        ),
+                        Container(
+                            margin: EdgeInsets.all(10.0),
+                            alignment: Alignment.center,
+                            child: CommonButton(text: "Continue", onTap: () {}))
                       ],
-                    ),
-                    // SizedBox(height: 20),
-                    Divider(
-                      height: 50,
-                      thickness: 1,
-                      color: AppColors.black,
-                    ),
-
-                    Row(
-                      children: [
-                        CommonText(
-                          text: "Total",
-                          style: boldText(
-                            fontSize: 14,
-                          ),
-                        ),
-                        Spacer(),
-                        CommonText(
-                          text: "Rs. 339",
-                          style: boldText(
-                            fontSize: 14,
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Center(
-                      child: CommonButton(
-                        text: "Continue to Checkout",
-                        onTap: () {},
-                      ),
                     ),
                   ],
-                ),
-              ),
-            ],
-          ),
+                ))
+          ],
         ),
       ),
     );

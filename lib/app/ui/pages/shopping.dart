@@ -35,7 +35,8 @@ class Shopping extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Get.toNamed('/cart');
+                        // Get.toNamed('/cart');
+                        HomeController.to.selectedIndex = 3;
                       },
                       child: Stack(
                         children: [
@@ -478,6 +479,18 @@ class Shopping extends StatelessWidget {
           );
         },
       );
+    } else if (ShoppingController.to.mainMenuIndexForBirds == 1) {
+      return const NoData(
+        msg: "Sorry No Data",
+      );
+    } else if (ShoppingController.to.mainMenuIndexForBirds == 2) {
+      return const NoData(
+        msg: "Sorry No Data",
+      );
+    } else if (ShoppingController.to.mainMenuIndexForBirds == 3) {
+      return const NoData(
+        msg: "Sorry No Data",
+      );
     }
   }
 
@@ -497,6 +510,14 @@ class Shopping extends StatelessWidget {
         },
       );
     } else if (ShoppingController.to.mainMenuIndexForFishAndAquatics == 1) {
+      return const NoData(
+        msg: "Sorry No Data",
+      );
+    } else if (ShoppingController.to.mainMenuIndexForFishAndAquatics == 2) {
+      return const NoData(
+        msg: "Sorry No Data",
+      );
+    } else if (ShoppingController.to.mainMenuIndexForFishAndAquatics == 3) {
       return const NoData(
         msg: "Sorry No Data",
       );

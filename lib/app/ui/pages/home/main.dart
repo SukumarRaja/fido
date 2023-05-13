@@ -3,14 +3,16 @@ import 'package:fido/app/ui/pages/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../themes/colors.dart';
+import '../doctors/list.dart';
 import '../profile/profile.dart';
 import '../shopping.dart';
+import 'home.dart';
 
 class HomeMain extends StatelessWidget {
   HomeMain({Key? key}) : super(key: key);
   final List<Widget> pages = [
-    Container(),
-    Container(),
+    Home(),
+    DoctorsList(),
     Shopping(),
     Cart(),
     Profile(),
