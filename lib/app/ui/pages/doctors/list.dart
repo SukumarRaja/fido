@@ -1,3 +1,4 @@
+import 'package:fido/app/ui/pages/doctors/doctor_details.dart';
 import 'package:fido/app/ui/widgets/common/button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -90,7 +91,9 @@ class DoctorsList extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 15,),
+              SizedBox(
+                height: 15,
+              ),
               SizedBox(
                 height: Get.height / 1.7,
                 child: GridView.builder(
@@ -102,14 +105,15 @@ class DoctorsList extends StatelessWidget {
                       return Container(
                         margin: EdgeInsets.all(4.0),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: AppColors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: AppColors.grey.withOpacity(.3),
-                                  blurRadius: 1,
-                                  spreadRadius: 1)
-                            ]),
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: AppColors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                color: AppColors.grey.withOpacity(.3),
+                                blurRadius: 1,
+                                spreadRadius: 1)
+                          ],
+                        ),
                         child: Column(
                           children: [
                             SizedBox(
@@ -125,7 +129,7 @@ class DoctorsList extends StatelessWidget {
                                 text: "Jane Andrews",
                                 style: boldText(fontSize: 16)),
                             CommonText(
-                                text: "Rao Hospital, Rs Puram",
+                                text: "Rao   Hospital, Rs Puram",
                                 style: regularText(
                                     fontSize: 9, color: AppColors.grey)),
                             SizedBox(
@@ -135,10 +139,12 @@ class DoctorsList extends StatelessWidget {
                                 height: 35,
                                 alignment: Alignment.center,
                                 child: CommonButton(
-                                    text: "Appointment", onTap: () {})),
-                            SizedBox(
-                              height: 10.0,
-                            )
+                                    text: "Appointment", onTap: () {
+                                      Get.to(()=>DoctorDetailsPage());
+                                })),
+                            // SizedBox(
+                            //   height: 10.0,
+                            // )
                           ],
                         ),
                       );

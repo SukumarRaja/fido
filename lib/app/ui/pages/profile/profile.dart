@@ -10,6 +10,7 @@ import '../../themes/colors.dart';
 import '../../themes/font_size.dart';
 import '../../widgets/common/text.dart';
 import '../../widgets/main_clip_path.dart';
+import '../stylist/stylist_list.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
@@ -211,6 +212,14 @@ class Profile extends StatelessWidget {
                     text: "My Address",
                     onTap: () {
                       Get.toNamed('/addresses');
+                    },
+                  ),
+                  SizedBox(height: 5),
+                  ProfileMenuTile(
+                    icon: Icons.style_outlined,
+                    text: "Pet Stylist",
+                    onTap: () {
+                      Get.to(()=>StylistListPage());
                     },
                   ),
                   SizedBox(height: 5),

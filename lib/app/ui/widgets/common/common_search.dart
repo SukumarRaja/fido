@@ -16,7 +16,8 @@ class CommonSearch extends StatelessWidget {
         hintText: 'Search...',
         prefixIcon: Icon(Icons.search, color: Colors.black54),
         hintStyle: TextStyle(color: Colors.grey.shade400),
-        border: OutlineInputBorder(
+        border:
+        OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide(
             color: Colors.grey.shade400,
