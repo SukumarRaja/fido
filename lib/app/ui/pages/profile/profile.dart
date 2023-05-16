@@ -1,3 +1,4 @@
+import 'package:fido/app/ui/pages/payment.dart';
 import 'package:fido/app/ui/pages/pets/add_pet.dart';
 import 'package:fido/app/ui/pages/pets/my_pets.dart';
 import 'package:fido/app/ui/pages/profile/edit_profile.dart';
@@ -203,7 +204,7 @@ class Profile extends StatelessWidget {
                     icon: Icons.credit_card_outlined,
                     text: "Payment",
                     onTap: () {
-                      Get.to(() => InitialPetAdd());
+                      Get.to(() => PaymentPage());
                     },
                   ),
                   SizedBox(height: 5),
