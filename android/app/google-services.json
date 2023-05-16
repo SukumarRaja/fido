@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "513420735241",
+    "project_id": "fido-b612e",
+    "storage_bucket": "fido-b612e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:513420735241:android:bea43019af9baabab319d8",
+        "android_client_info": {
+          "package_name": "limitless.fido"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "513420735241-72l6uf8t9jl7sp4bctc8q2o1tai1apoo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB95nmsRIKNFMrod-a-vrVM7d-ctX-Lb_c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "513420735241-72l6uf8t9jl7sp4bctc8q2o1tai1apoo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

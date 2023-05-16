@@ -1,4 +1,4 @@
-package com.example.fido;
+package limitless.fido;
 
 import io.flutter.embedding.android.FlutterActivity;
 
