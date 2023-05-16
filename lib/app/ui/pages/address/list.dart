@@ -5,6 +5,7 @@ import '../../themes/colors.dart';
 import '../../themes/font_size.dart';
 import '../../widgets/common/text.dart';
 import '../../widgets/main_clip_path.dart';
+import 'edit_address.dart';
 
 class Addresses extends StatelessWidget {
   const Addresses({Key? key}) : super(key: key);
@@ -70,12 +71,20 @@ class Addresses extends StatelessWidget {
                                   color: AppColors.red,
                                 )),
                             Positioned(
-                                right: 10,
-                                top: 15,
+                              right: 10,
+                              top: 15,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Get.to(
+                                    () => EditAddress(),
+                                  );
+                                },
                                 child: Icon(
                                   Icons.edit,
                                   color: AppColors.shoppingMenu,
-                                )),
+                                ),
+                              ),
+                            ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 15.0, vertical: 15.0),

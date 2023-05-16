@@ -1,3 +1,4 @@
+import 'package:fido/app/ui/pages/stylist/stylist_details.dart';
 import 'package:fido/app/ui/themes/colors.dart';
 import 'package:fido/app/ui/themes/font_size.dart';
 import 'package:fido/app/ui/widgets/common/common_search.dart';
@@ -95,6 +96,9 @@ class StylistListPage extends StatelessWidget {
                       stylistAddress: '12, Centric Rd,GG Park',
                       stylistRating: '5.0',
                       stylistDistance: '2 KM',
+                      onTap: () {
+                        Get.to(() => StylistProfile());
+                      },
                     );
                   },
                 ),

@@ -1,5 +1,8 @@
 import 'package:fido/app/controller/stylist.dart';
 import 'package:fido/app/ui/widgets/common/button.dart';
+import 'package:fido/app/ui/widgets/stylist/details.dart';
+import 'package:fido/app/ui/widgets/stylist/review.dart';
+import 'package:fido/app/ui/widgets/stylist/services.dart';
 import 'package:fido/app/ui/widgets/stylist/stylist_selectcard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,8 +11,8 @@ import '../../themes/colors.dart';
 import '../../themes/font_size.dart';
 import '../../widgets/common/text.dart';
 
-class StylistDetailsPage extends StatelessWidget {
-  const StylistDetailsPage({Key? key}) : super(key: key);
+class StylistProfile extends StatelessWidget {
+  const StylistProfile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,7 @@ class StylistDetailsPage extends StatelessWidget {
               ),
               stylistImage(),
               BookAVisitCard(),
-              StylistSelectDetails(),
+              stylistDescription(),
             ],
           ),
         ),
@@ -52,7 +55,7 @@ class StylistDetailsPage extends StatelessWidget {
     );
   }
 
-  Container StylistSelectDetails() {
+  Container stylistDescription() {
     return Container(
       height: Get.height * 0.4,
       width: Get.width,
@@ -69,41 +72,51 @@ class StylistDetailsPage extends StatelessWidget {
           )
         ],
       ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              StylistSelectCard(
-                selectTitle: 'Details',
-                onTap: () {
-                  StylistController.to.selectIndex = 0;
-                },
-                index: 0,
-              ),
-              StylistSelectCard(
-                selectTitle: 'Services',
-                onTap: () {
-                  StylistController.to.selectIndex = 1;
-                },
-                index: 1,
-              ),
-              StylistSelectCard(
-                selectTitle: 'Reviews',
-                onTap: () {
-                  StylistController.to.selectIndex = 2;
-                },
-                index: 2,
-              ),
-            ],
-          ),
-          CommonText(
-            text:
-                "\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, \n\nwhen an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ",
-            style: regularText(
-              color: AppColors.grey,
+      child: Obx(
+        () => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                StylistSelectCard(
+                  selectTitle: 'Details',
+                  onTap: () {
+                    StylistController.to.selectIndex = 0;
+                  },
+                  index: 0,
+                ),
+                StylistSelectCard(
+                  selectTitle: 'Services',
+                  onTap: () {
+                    StylistController.to.selectIndex = 1;
+                  },
+                  index: 1,
+                ),
+                StylistSelectCard(
+                  selectTitle: 'Reviews',
+                  onTap: () {
+                    StylistController.to.selectIndex = 2;
+                  },
+                  index: 2,
+                ),
+              ],
             ),
-          ),
-        ],
+            Container(
+              height: Get.height * 0.3,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    StylistController.to.selectIndex == 0
+                        ? StylistDetail()
+                        : StylistController.to.selectIndex == 1
+                            ? StylistServices()
+                            : StylistReview(),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
