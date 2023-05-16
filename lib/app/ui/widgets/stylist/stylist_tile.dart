@@ -13,20 +13,19 @@ class StylistTile extends StatelessWidget {
       required this.stylistName,
       required this.stylistAddress,
       required this.stylistRating,
-      required this.stylistDistance})
+      required this.stylistDistance, required this.onTap})
       : super(key: key);
   final String stylistImage;
   final String stylistName;
   final String stylistAddress;
   final String stylistRating;
   final String stylistDistance;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Get.to(()=>StylistDetailsPage());
-      },
+      onTap: onTap,
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         padding: EdgeInsets.all(8),

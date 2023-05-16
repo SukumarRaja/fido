@@ -166,7 +166,7 @@ class Cart extends StatelessWidget {
                                 return Row(
                                   children: [
                                     CommonText(
-                                        text: "Pedgiree",
+                                        text: "Pedigree",
                                         style: regularText(fontSize: 14)),
                                     Spacer(),
                                     CommonText(
@@ -216,13 +216,14 @@ class Cart extends StatelessWidget {
                           ),
                         ),
                         Container(
+                            width: Get.width,
                             margin: EdgeInsets.all(10.0),
-                            alignment: Alignment.center,
-                            child: CommonButton(text: "Continue", onTap: () {}))
+                            child: CommonButton(
+                                text: "Continue to Payment", onTap: () {}))
                       ],
                     ),
                   ],
-                ))
+                )),
           ],
         ),
       ),

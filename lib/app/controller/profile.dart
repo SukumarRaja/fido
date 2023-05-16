@@ -10,6 +10,14 @@ class ProfileController extends GetxController {
   final TextEditingController location = TextEditingController();
   final TextEditingController language = TextEditingController();
 
+  //address
+  final TextEditingController address1 = TextEditingController();
+  final TextEditingController address2 = TextEditingController();
+  final TextEditingController city = TextEditingController();
+  final TextEditingController pincode = TextEditingController();
+  final TextEditingController state = TextEditingController();
+
+
 
 
 
