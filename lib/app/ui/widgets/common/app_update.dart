@@ -46,7 +46,7 @@ updateAlertDialog(BuildContext context,
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    alignment: Alignment.bottomCenter,
+    alignment: Alignment.center,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(
         Radius.circular(15.0),

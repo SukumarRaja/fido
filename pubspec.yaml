@@ -20,6 +20,9 @@ dependencies:
   firebase_remote_config: ^4.2.0
   package_info_plus: ^4.0.0
   url_launcher: ^6.1.11
+  firebase_core: ^2.12.0
+  firebase_auth: ^4.6.0
+  fluttertoast: ^8.2.1
 
 dev_dependencies:
   flutter_test:
@@ -32,6 +35,7 @@ flutter:
     - assets/images/
     - assets/images/svgs/
     - assets/flags/
+    - assets/map_style.json
   fonts:
     - family: 'bold'
       fonts:

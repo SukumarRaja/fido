@@ -16,6 +16,12 @@ class AuthController extends GetxController {
   final TextEditingController lEmail = TextEditingController();
   final TextEditingController lPassword = TextEditingController();
 
+  //register
+  final TextEditingController name = TextEditingController();
+  final TextEditingController email = TextEditingController();
+  final TextEditingController phone = TextEditingController();
+  final TextEditingController password = TextEditingController();
+
   //verify email
   final TextEditingController vEmail = TextEditingController();
 
@@ -90,7 +96,8 @@ class AuthController extends GetxController {
     debugPrint("convert local version $localVersion");
 
     // get remote app version and change to int
-    var rv = remoteConfig.getString('version');
+    var rv = remoteConfig.getString('android');
+    print("rc is $rv");
     var rSplit = rv.replaceAll(".", "");
     var remoteVersion = int.parse(rSplit);
     debugPrint("remote version $rv");

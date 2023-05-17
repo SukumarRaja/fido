@@ -8,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../controller/otp.dart';
+import '../../widgets/common/loading.dart';
 import '../../widgets/common/otp_pinput.dart';
+import '../../widgets/intl_phone_field.dart';
 import '../../widgets/main_clip_path.dart';
 import 'reset.dart';
 
@@ -118,15 +120,23 @@ class ForgotPassword extends StatelessWidget {
         const SizedBox(
           height: 15,
         ),
-        Container(
-          alignment: Alignment.center,
-          margin: const EdgeInsets.only(top: 30),
-          child: CommonButton(
-            text: "Verify OTP",
-            onTap: () {
-              Get.toNamed('/reset');
-            },
-          ),
+        Obx(
+          () => OtpController.to.verifyingOtp == true
+              ? const Center(
+                  child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  child: SimpleLoading(),
+                ))
+              : Container(
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.only(top: 30),
+                  child: CommonButton(
+                    text: "Verify OTP",
+                    onTap: () {
+                      OtpController.to.verifyOtp(isRegister: false);
+                    },
+                  ),
+                ),
         ),
         const SizedBox(
           height: 15,
@@ -193,26 +203,42 @@ class ForgotPassword extends StatelessWidget {
               style: regularText()),
         ),
         const SizedBox(height: 15),
-        CommonTextFormField(
-          hintText: "Enter email",
-          controller: AuthController.to.lEmail,
-          validator: (data) {
-            if (data == null || data.isEmpty || data == "") {
-              return "Please enter email";
-            }
-            return null;
-          },
-        ),
-        Container(
-          alignment: Alignment.center,
-          margin: const EdgeInsets.only(top: 30),
-          child: CommonButton(
-            text: "Send OTP",
-            onTap: () {
-              AuthController.to.isNavigateOtpPage = true;
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: IntlPhoneField(
+            maxLength: 10,
+            hintText: "Phone",
+            controller: AuthController.to.phone,
+            initialCountryCode: "IN",
+            fontFamily: "medium",
+            validator: (data) {
+              if (data!.isEmpty || data == "") {
+                return "Phone field required";
+              } else if (data.length < 10) {
+                return "Phone number must be 10 character";
+              }
+              return null;
             },
           ),
         ),
+        Obx(
+          () => OtpController.to.loading == true
+              ? const Center(
+                  child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  child: SimpleLoading(),
+                ))
+              : Container(
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.only(top: 30),
+                  child: CommonButton(
+                    text: "Send OTP",
+                    onTap: () {
+                      OtpController.to.sendOtp(isRegister: false);
+                    },
+                  ),
+                ),
+        )
       ],
     );
   }

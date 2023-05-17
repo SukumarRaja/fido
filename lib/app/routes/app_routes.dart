@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import '../ui/pages/address/list.dart';
 import '../ui/pages/cart.dart';
+import '../ui/pages/home/home.dart';
 import '../ui/pages/home/main.dart';
 import '../ui/pages/login.dart';
 import '../ui/pages/initial.dart';
@@ -60,6 +61,11 @@ class AppRoutes {
     GetPage(
         name: '/addresses',
         page: () => const Addresses(),
+        transition: Transition.circularReveal,
+        transitionDuration: const Duration(seconds: 1)),
+    GetPage(
+        name: '/home',
+        page: () => const Home(),
         transition: Transition.circularReveal,
         transitionDuration: const Duration(seconds: 1)),
   ];
