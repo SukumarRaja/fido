@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'dart:ui' as ui;
-
+int statusCode=0;
 class HomeController extends GetxController {
   static HomeController get to => Get.put(HomeController());
   GoogleMapController? mapController;

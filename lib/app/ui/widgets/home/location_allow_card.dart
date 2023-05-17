@@ -15,7 +15,7 @@ class LocationAllowCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(media.width * 0.05),
       width: media.width * 0.6,
-      height: media.width * 0.3,
+      // height: media.width * 0.3,
       decoration: BoxDecoration(
           color: AppColors.white,
           boxShadow: [

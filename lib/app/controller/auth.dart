@@ -6,11 +6,15 @@ import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../data/repository/auth.dart';
 import '../ui/pages/initial.dart';
 import '../ui/widgets/common/app_update.dart';
 
 class AuthController extends GetxController {
   static AuthController get to => Get.put(AuthController());
+  final repository = AuthRepository();
+
+  final loginKey = GlobalKey<FormState>();
 
   //login
   final TextEditingController lEmail = TextEditingController();
@@ -43,6 +47,14 @@ class AuthController extends GetxController {
 
   set isNavigateOtpPage(value) {
     _isNavigateOtpPage.value = value;
+  }
+
+  var _loginLoading = false.obs;
+
+  get loginLoading => _loginLoading.value;
+
+  set loginLoading(value) {
+    _loginLoading.value = value;
   }
 
   loginCheck() async {
@@ -125,6 +137,28 @@ class AuthController extends GetxController {
       }
     } else {
       debugPrint("update not available");
+    }
+  }
+
+  login() async {
+    loginLoading = true;
+    var body = {"email": lEmail.text.trimRight(), "password": lPassword.text};
+    try {
+      var res = await repository.login(body: body);
+      if (res['status'] == "200") {
+        loginLoading = false;
+        debugPrint("Login Successfully");
+        var body = {'token': res['token']};
+        Get.toNamed('/homeMain');
+
+        storeLocalDevice(body: body);
+      } else {
+        loginLoading = false;
+        debugPrint("Login Failed");
+      }
+    } catch (e) {
+      loginLoading = false;
+      debugPrint("Error from server on login $e");
     }
   }
 }
