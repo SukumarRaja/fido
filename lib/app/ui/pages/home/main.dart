@@ -68,59 +68,61 @@ class HomeMain extends StatelessWidget {
           false;
     }
 
-    return SafeArea(
-      child: WillPopScope(
-        onWillPop: onWillPop,
-        child: Scaffold(
-          bottomNavigationBar: Container(
-            margin: const EdgeInsets.all(10.0),
-            height: 55,
-            width: Get.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              gradient: const LinearGradient(
-                  colors: [AppColors.primary, AppColors.secondary]),
+    return Obx(() => HomeController.to.selectedIndex == 0
+        ? WillPopScope(onWillPop: onWillPop, child: const Home())
+        : SafeArea(
+            child: WillPopScope(
+              onWillPop: onWillPop,
+              child: Scaffold(
+                bottomNavigationBar: Container(
+                  margin: const EdgeInsets.all(10.0),
+                  height: 55,
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    gradient: const LinearGradient(
+                        colors: [AppColors.primary, AppColors.secondary]),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      buildIcon(
+                          index: 0,
+                          icon: Icons.home_outlined,
+                          onTap: () {
+                            HomeController.to.selectedIndex = 0;
+                          }),
+                      buildIcon(
+                          index: 1,
+                          icon: Icons.local_hospital_outlined,
+                          onTap: () {
+                            HomeController.to.selectedIndex = 1;
+                          }),
+                      buildIcon(
+                          index: 2,
+                          icon: Icons.shopping_bag_outlined,
+                          onTap: () {
+                            HomeController.to.selectedIndex = 2;
+                          }),
+                      buildIcon(
+                          index: 3,
+                          icon: Icons.shopping_cart_outlined,
+                          onTap: () {
+                            HomeController.to.selectedIndex = 3;
+                          }),
+                      buildIcon(
+                          index: 4,
+                          icon: Icons.person_outline,
+                          onTap: () {
+                            HomeController.to.selectedIndex = 4;
+                          }),
+                    ],
+                  ),
+                ),
+                body: Obx(() => pages[HomeController.to.selectedIndex]),
+              ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                buildIcon(
-                    index: 0,
-                    icon: Icons.home_outlined,
-                    onTap: () {
-                      HomeController.to.selectedIndex = 0;
-                    }),
-                buildIcon(
-                    index: 1,
-                    icon: Icons.local_hospital_outlined,
-                    onTap: () {
-                      HomeController.to.selectedIndex = 1;
-                    }),
-                buildIcon(
-                    index: 2,
-                    icon: Icons.shopping_bag_outlined,
-                    onTap: () {
-                      HomeController.to.selectedIndex = 2;
-                    }),
-                buildIcon(
-                    index: 3,
-                    icon: Icons.shopping_cart_outlined,
-                    onTap: () {
-                      HomeController.to.selectedIndex = 3;
-                    }),
-                buildIcon(
-                    index: 4,
-                    icon: Icons.person_outline,
-                    onTap: () {
-                      HomeController.to.selectedIndex = 4;
-                    }),
-              ],
-            ),
-          ),
-          body: Obx(() => pages[HomeController.to.selectedIndex]),
-        ),
-      ),
-    );
+          ));
   }
 
   Obx buildIcon({required index, required Function() onTap, required icon}) {

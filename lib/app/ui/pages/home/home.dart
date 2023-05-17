@@ -87,9 +87,8 @@ class Home extends StatelessWidget {
                                                       ),
                                                     )),
                                           ),
-
                                           Positioned(
-                                            bottom: 20,
+                                            bottom: 80,
                                             right: 20,
                                             child: InkWell(
                                               onTap: () async {
@@ -123,6 +122,72 @@ class Home extends StatelessWidget {
                                               ),
                                             ),
                                           ),
+                                          Positioned(
+                                            bottom: 0,
+                                            right: 0,
+                                            left: 0,
+                                            child: Container(
+                                              margin:
+                                                  const EdgeInsets.all(10.0),
+                                              height: 55,
+                                              width: Get.width,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                                gradient: const LinearGradient(
+                                                    colors: [
+                                                      AppColors.primary,
+                                                      AppColors.secondary
+                                                    ]),
+                                              ),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  buildIcon(
+                                                      index: 0,
+                                                      icon: Icons.home_outlined,
+                                                      onTap: () {
+                                                        HomeController.to
+                                                            .selectedIndex = 0;
+                                                      }),
+                                                  buildIcon(
+                                                      index: 1,
+                                                      icon: Icons
+                                                          .local_hospital_outlined,
+                                                      onTap: () {
+                                                        HomeController.to
+                                                            .selectedIndex = 1;
+                                                      }),
+                                                  buildIcon(
+                                                      index: 2,
+                                                      icon: Icons
+                                                          .shopping_bag_outlined,
+                                                      onTap: () {
+                                                        HomeController.to
+                                                            .selectedIndex = 2;
+                                                      }),
+                                                  buildIcon(
+                                                      index: 3,
+                                                      icon: Icons
+                                                          .shopping_cart_outlined,
+                                                      onTap: () {
+                                                        HomeController.to
+                                                            .selectedIndex = 3;
+                                                      }),
+                                                  buildIcon(
+                                                      index: 4,
+                                                      icon:
+                                                          Icons.person_outline,
+                                                      onTap: () {
+                                                        HomeController.to
+                                                            .selectedIndex = 4;
+                                                      }),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       )
                                     : const SizedBox()
@@ -147,8 +212,7 @@ class Home extends StatelessWidget {
                       progressColor: Colors.green,
                     ),
                   ),
-                  const Menu(),
-
+                  // const Menu(),
                   Obx(() => HomeController.to.isLoading == true
                       ? const Positioned(top: 0, child: Loading())
                       : Container()),
@@ -192,5 +256,25 @@ class Home extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Obx buildIcon({required index, required Function() onTap, required icon}) {
+    return Obx(() => GestureDetector(
+          onTap: onTap,
+          child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(7),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: HomeController.to.selectedIndex == index
+                      ? AppColors.white
+                      : Colors.transparent),
+              child: Icon(
+                icon,
+                color: HomeController.to.selectedIndex == index
+                    ? AppColors.primary
+                    : AppColors.white,
+              )),
+        ));
   }
 }
