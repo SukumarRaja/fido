@@ -129,7 +129,7 @@ class Login extends StatelessWidget {
         ),
         CommonTextFormField(
           hintText: "Enter email",
-          controller: AuthController.to.lEmail,
+          controller: AuthController.to.lPassword,
           validator: (data) {
             if (data == null || data.isEmpty || data == "") {
               return "Please enter email";
@@ -195,75 +195,80 @@ class Login extends StatelessWidget {
     );
   }
 
-  Column buildLogin() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          child: CommonText(
-              text: "Login", style: boldText(color: AppColors.primary)),
-        ),
-        const SizedBox(height: 50.0),
-        CommonTextFormField(
-          hintText: "Enter email",
-          controller: AuthController.to.lEmail,
-          validator: (data) {
-            if (data == null || data.isEmpty || data == "") {
-              return "Please enter email";
-            }
-            return null;
-          },
-        ),
-        CommonTextFormField(
-          hintText: "Enter password",
-          obscureText: true,
-          controller: AuthController.to.lEmail,
-          validator: (data) {
-            if (data == null || data.isEmpty || data == "") {
-              return "Please enter password";
-            } else if (data.length < 6) {
-              return "Password must be 8 character";
-            }
-            return null;
-          },
-        ),
-        Container(
-            alignment: Alignment.bottomRight,
-            margin: const EdgeInsets.only(right: 15.0),
-            child: GestureDetector(
-                onTap: () {
-                  Get.toNamed('/forgot');
-                },
-                child: CommonText(
-                    text: "Forgot Password ?", style: regularText()))),
-        Container(
-          alignment: Alignment.center,
-          margin: const EdgeInsets.only(top: 50),
-          child: CommonButton(
-            text: "Login",
-            onTap: () {
-              Get.toNamed('/homeMain');
+  Form buildLogin() {
+    return Form(
+      key: AuthController.to.loginKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: CommonText(
+                text: "Login", style: boldText(color: AppColors.primary)),
+          ),
+          const SizedBox(height: 50.0),
+          CommonTextFormField(
+            hintText: "Enter email",
+            controller: AuthController.to.lEmail,
+            validator: (data) {
+              if (data == null || data.isEmpty || data == "") {
+                return "Please enter email";
+              }
+              return null;
             },
           ),
-        ),
-        const SizedBox(height: 15.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CommonText(text: "Don't have an account ?", style: regularText()),
-            const SizedBox(width: 5),
-            GestureDetector(
+          CommonTextFormField(
+            hintText: "Enter password",
+            obscureText: true,
+            controller: AuthController.to.lPassword,
+            validator: (data) {
+              if (data == null || data.isEmpty || data == "") {
+                return "Please enter password";}
+              // } else if (data.length < 6) {
+              //   return "Password must be 8 character";
+              // }
+              return null;
+            },
+          ),
+          Container(
+              alignment: Alignment.bottomRight,
+              margin: const EdgeInsets.only(right: 15.0),
+              child: GestureDetector(
+                  onTap: () {
+                    Get.toNamed('/forgot');
+                  },
+                  child: CommonText(
+                      text: "Forgot Password ?", style: regularText()))),
+          Container(
+            alignment: Alignment.center,
+            margin: const EdgeInsets.only(top: 50),
+            child: CommonButton(
+              text: "Login",
               onTap: () {
-                AuthController.to.isLogin = false;
+                if(AuthController.to.loginKey.currentState!.validate()){
+                  AuthController.to.login();
+                }
               },
-              child: CommonText(
-                  text: "Register",
-                  style: mediumText(color: AppColors.primary)),
             ),
-          ],
-        ),
-      ],
+          ),
+          const SizedBox(height: 15.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CommonText(text: "Don't have an account ?", style: regularText()),
+              const SizedBox(width: 5),
+              GestureDetector(
+                onTap: () {
+                  AuthController.to.isLogin = false;
+                },
+                child: CommonText(
+                    text: "Register",
+                    style: mediumText(color: AppColors.primary)),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

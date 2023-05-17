@@ -206,12 +206,12 @@ class Cart extends StatelessWidget {
                               CommonText(
                                   text: "Total",
                                   style: boldText(
-                                      fontSize: 15, color: AppColors.green)),
+                                      fontSize: 15, color: AppColors.black)),
                               Spacer(),
                               CommonText(
                                   text: "Rs 1362.00",
                                   style: boldText(
-                                      fontSize: 15, color: AppColors.green)),
+                                      fontSize: 15, color: AppColors.black)),
                             ],
                           ),
                         ),
