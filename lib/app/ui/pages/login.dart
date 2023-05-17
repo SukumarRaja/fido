@@ -3,6 +3,7 @@ import 'package:fido/app/ui/themes/colors.dart';
 import 'package:fido/app/ui/themes/font_size.dart';
 import 'package:fido/app/ui/widgets/common/button.dart';
 import 'package:fido/app/ui/widgets/common/common_textform.dart';
+import 'package:fido/app/ui/widgets/common/loading.dart';
 import 'package:fido/app/ui/widgets/common/text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -223,7 +224,8 @@ class Login extends StatelessWidget {
             controller: AuthController.to.lPassword,
             validator: (data) {
               if (data == null || data.isEmpty || data == "") {
-                return "Please enter password";}
+                return "Please enter password";
+              }
               // } else if (data.length < 6) {
               //   return "Password must be 8 character";
               // }
@@ -239,17 +241,26 @@ class Login extends StatelessWidget {
                   },
                   child: CommonText(
                       text: "Forgot Password ?", style: regularText()))),
-          Container(
-            alignment: Alignment.center,
-            margin: const EdgeInsets.only(top: 50),
-            child: CommonButton(
-              text: "Login",
-              onTap: () {
-                if(AuthController.to.loginKey.currentState!.validate()){
-                  AuthController.to.login();
-                }
-              },
-            ),
+          Obx(
+            () => AuthController.to.loginLoading == true
+                ? const Center(
+                    child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 15.0),
+                    child: SimpleLoading(),
+                  ))
+                : Container(
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(top: 50),
+                    child: CommonButton(
+                      text: "Login",
+                      onTap: () {
+                        if (AuthController.to.loginKey.currentState!
+                            .validate()) {
+                          AuthController.to.login();
+                        }
+                      },
+                    ),
+                  ),
           ),
           const SizedBox(height: 15.0),
           Row(

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:fido/app/ui/widgets/common/toast.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -57,6 +58,14 @@ class AuthController extends GetxController {
     _loginLoading.value = value;
   }
 
+  final _logoutLoading = false.obs;
+
+  get logoutLoading => _logoutLoading.value;
+
+  set logoutLoading(value) {
+    _logoutLoading.value = value;
+  }
+
   loginCheck() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var token = pref.getString('token');
@@ -65,6 +74,28 @@ class AuthController extends GetxController {
     } else {
       return false;
     }
+  }
+
+  logout() async {
+    logoutLoading = true;
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    var token = pref.getString('token');
+    Future.delayed(const Duration(seconds: 2), () {
+      if (token != null && token.isNotEmpty) {
+        if (token == "token") {
+          pref.remove('token');
+          Get.off(() => const Initial());
+          logoutLoading = false;
+          commonToast(msg: "Logout Success");
+        } else {
+          logoutLoading = false;
+          commonToast(msg: "Logout Failed");
+        }
+      } else {
+        logoutLoading = false;
+        commonToast(msg: "No token saved, can't logout");
+      }
+    });
   }
 
   checkOnBoarding() async {
@@ -148,7 +179,9 @@ class AuthController extends GetxController {
       if (res['status'] == "200") {
         loginLoading = false;
         debugPrint("Login Successfully");
-        var body = {'token': res['token']};
+        // var body = {'token': res['token']};
+        var body = {'token': 'token'};
+        commonToast(msg: "${res['message']}");
         Get.toNamed('/homeMain');
 
         storeLocalDevice(body: body);

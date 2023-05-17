@@ -213,9 +213,9 @@ class Home extends StatelessWidget {
                     ),
                   ),
                   // const Menu(),
-                  Obx(() => HomeController.to.isLoading == true
-                      ? const Positioned(top: 0, child: Loading())
-                      : Container()),
+                  // Obx(() => HomeController.to.isLoading == true
+                  //     ? const Positioned(top: 0, child: Loading())
+                  //     : Container()),
                 ],
               )),
         );

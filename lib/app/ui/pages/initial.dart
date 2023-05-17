@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controller/auth.dart';
+import 'home/main.dart';
 import 'login.dart';
 import 'onboard.dart';
 
@@ -40,8 +41,8 @@ class _InitialState extends State<Initial> {
           builder: (_) => isLogin == "onBoarding"
               ? OnBoarding()
               : isLogin == "login"
-                  ? Container()
-                  : Login()),
+                  ? HomeMain()
+                  : const Login()),
     );
   }
 }

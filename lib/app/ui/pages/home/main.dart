@@ -1,3 +1,4 @@
+import 'package:fido/app/controller/auth.dart';
 import 'package:fido/app/controller/home.dart';
 import 'package:fido/app/ui/pages/cart.dart';
 import 'package:flutter/material.dart';
@@ -74,6 +75,9 @@ class HomeMain extends StatelessWidget {
             child: WillPopScope(
               onWillPop: onWillPop,
               child: Scaffold(
+                backgroundColor: AuthController.to.logoutLoading == true
+                    ? AppColors.grey.withOpacity(.3)
+                    : null,
                 bottomNavigationBar: Container(
                   margin: const EdgeInsets.all(10.0),
                   height: 55,
@@ -127,7 +131,7 @@ class HomeMain extends StatelessWidget {
 
   Obx buildIcon({required index, required Function() onTap, required icon}) {
     return Obx(() => GestureDetector(
-          onTap: onTap,
+          onTap: AuthController.to.logoutLoading == true ? null : onTap,
           child: Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.all(7),
