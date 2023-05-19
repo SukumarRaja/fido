@@ -6,6 +6,7 @@ import '../../themes/colors.dart';
 import '../../themes/font_size.dart';
 import '../../widgets/common/text.dart';
 import '../../widgets/main_clip_path.dart';
+import 'add_pet.dart';
 
 class MyPets extends StatelessWidget {
   const MyPets({Key? key}) : super(key: key);
@@ -73,18 +74,23 @@ class MyPets extends StatelessWidget {
                   ],
                 ),
                 child: Center(
-                  child: Container(
-                    height: 25,
-                    width: 25,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: AppColors.black,
+                  child: GestureDetector(
+                    onTap: (){
+                      Get.to(()=>InitialPetAdd());
+                    },
+                    child: Container(
+                      height: 25,
+                      width: 25,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: AppColors.black,
+                        ),
                       ),
-                    ),
-                    child: Icon(
-                      Icons.add,
-                      color: AppColors.black.withOpacity(0.5),
+                      child: Icon(
+                        Icons.add,
+                        color: AppColors.black.withOpacity(0.5),
+                      ),
                     ),
                   ),
                 ),

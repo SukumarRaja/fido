@@ -1,3 +1,4 @@
+import 'package:fido/app/controller/file.dart';
 import 'package:fido/app/controller/pet.dart';
 import 'package:fido/app/ui/themes/colors.dart';
 import 'package:fido/app/ui/themes/font_size.dart';
@@ -5,6 +6,7 @@ import 'package:fido/app/ui/widgets/common/button.dart';
 import 'package:fido/app/ui/widgets/common/common_popup.dart';
 import 'package:fido/app/ui/widgets/common/common_textform.dart';
 import 'package:fido/app/ui/widgets/common/text.dart';
+import 'package:fido/app/ui/widgets/pets/petdocument.dart';
 import 'package:fido/app/ui/widgets/pets/petimage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +16,7 @@ class InitialPetAdd extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PetController.to.addPetPageIndex = 3;
+    PetController.to.addPetPageIndex = 2;
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -46,8 +48,8 @@ class InitialPetAdd extends StatelessWidget {
                           boxShadow: [
                             PetController.to.addPetPageIndex == 1
                                 ? BoxShadow(
-                                    color: AppColors.white,
-                                    spreadRadius: 2,
+                                    color: AppColors.secondary,
+                                    spreadRadius: 1,
                                     blurRadius: 1,
                                   )
                                 : BoxShadow(),
@@ -70,8 +72,8 @@ class InitialPetAdd extends StatelessWidget {
                           boxShadow: [
                             PetController.to.addPetPageIndex == 2
                                 ? BoxShadow(
-                                    color: AppColors.white,
-                                    spreadRadius: 2,
+                                    color: AppColors.secondary,
+                                    spreadRadius: 1,
                                     blurRadius: 1,
                                   )
                                 : BoxShadow(),
@@ -90,8 +92,8 @@ class InitialPetAdd extends StatelessWidget {
                           boxShadow: [
                             PetController.to.addPetPageIndex == 3
                                 ? BoxShadow(
-                                    color: AppColors.white,
-                                    spreadRadius: 2,
+                                    color: AppColors.secondary,
+                                    spreadRadius: 1,
                                     blurRadius: 1,
                                   )
                                 : BoxShadow(),
@@ -129,10 +131,32 @@ class InitialPetAdd extends StatelessWidget {
           text: "Upload Files",
           style: mediumText(color: AppColors.white, fontSize: 20),
         ),
-
-
+        Container(
+          padding: EdgeInsets.all(8),
+          margin: EdgeInsets.symmetric(vertical: 40),
+          decoration: BoxDecoration(
+            color: AppColors.white.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: SizedBox(
+            height: 400,
+            width: Get.width,
+            child: GridView.builder(
+              itemCount: 4,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 1,
+                crossAxisCount: 2,
+              ),
+              itemBuilder: (context, int index) {
+                return PetDocumentBox(
+                  onTap: () {},
+                );
+              },
+            ),
+          ),
+        ),
         Padding(
-          padding: EdgeInsets.symmetric(vertical: 100.0),
+          padding: EdgeInsets.symmetric(vertical: 50.0),
           child: CommonButton(
               text: "Next",
               onTap: () {
@@ -153,7 +177,6 @@ class InitialPetAdd extends StatelessWidget {
           ),
         ),
         SizedBox(height: 60),
-
         Container(
           padding: EdgeInsets.all(8),
           decoration: BoxDecoration(
@@ -170,7 +193,24 @@ class InitialPetAdd extends StatelessWidget {
                 crossAxisCount: 2,
               ),
               itemBuilder: (context, int index) {
-                return PetImageBox();
+                return PetImageBox(
+                  onTap: () {
+                    if (index == 0) {
+                      FileUploadController.to
+                          .showSelectionDialogPet1and2(oneOrTwo: true);
+                    } else if (index == 1) {
+                      FileUploadController.to
+                          .showSelectionDialogPet1and2(oneOrTwo: false);
+                    } else if (index == 2) {
+                      FileUploadController.to
+                          .showSelectionDialogPet3and4(threeOrfour: true);
+                    } else {
+                      FileUploadController.to
+                          .showSelectionDialogPet3and4(threeOrfour: false);
+                    }
+                  },
+                  index: index,
+                );
               },
             ),
           ),
