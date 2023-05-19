@@ -1,3 +1,5 @@
+import 'package:fido/app/controller/profile.dart';
+import 'package:fido/app/ui/pages/profile/profile.dart';
 import 'package:flutter/material.dart';
 import '../../themes/colors.dart';
 
@@ -12,7 +14,7 @@ class ProfileTextFormField extends StatefulWidget {
     this.errorText,
     this.icon,
     this.isEnabled = true,
-    this.suffixOnTap,
+    this.suffixOnTap,  this.onChanged,
   }) : super(key: key);
   final String hintText;
   final String? errorText;
@@ -23,6 +25,7 @@ class ProfileTextFormField extends StatefulWidget {
   final IconData? icon;
   final Function()? suffixOnTap;
   final bool isEnabled;
+  final Function(String)? onChanged;
 
   @override
   State<ProfileTextFormField> createState() => _ProfileTextFormFieldState();
@@ -34,6 +37,7 @@ class _ProfileTextFormFieldState extends State<ProfileTextFormField> {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: TextFormField(
+        onChanged: widget.onChanged,
         enabled: widget.isEnabled,
         style: const TextStyle(
           fontFamily: "medium",

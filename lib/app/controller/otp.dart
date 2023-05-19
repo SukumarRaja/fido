@@ -32,6 +32,22 @@ class OtpController extends GetxController {
     _seconds.value = value;
   }
 
+  final _isShowOtpField = false.obs;
+
+  get isShowOtpField => _isShowOtpField.value;
+
+  set isShowOtpField(value) {
+    _isShowOtpField.value = value;
+  }
+
+  final _isOtpVerified = false.obs;
+
+  get isOtpVerified => _isOtpVerified.value;
+
+  set isOtpVerified(value) {
+    _isOtpVerified.value = value;
+  }
+
   final _isStartResend = false.obs;
 
   get isStartResend => _isStartResend.value;
@@ -113,7 +129,9 @@ class OtpController extends GetxController {
       loading = false;
       if (AuthController.to.phone.text == AppConfig.testingPhone) {
         AuthController.to.phone.text = "";
-        AuthController.to.isNavigateOtpPage = true;
+        if (isRegister == false) {
+          AuthController.to.isNavigateOtpPage = true;
+        }
       } else {
         isLive = true;
         if (isLive == true) {
@@ -121,10 +139,12 @@ class OtpController extends GetxController {
           debugPrint("phone number ${AuthController.to.phone.text}");
           verificationCompleted(AuthCredential cred) {
             loading = false;
-            AuthController.to.isNavigateOtpPage = true;
-            // if (isRegister == true) {
-            //   verifyOtp(isRegister: isRegister);
-            // }
+            if (isRegister == false) {
+              AuthController.to.isNavigateOtpPage = true;
+              // if (isRegister == true) {
+              //   verifyOtp(isRegister: isRegister);
+              // }
+            }
           }
 
           verificationFailed(FirebaseAuthException exception) {
@@ -139,9 +159,11 @@ class OtpController extends GetxController {
             if (verificationId.isEmpty) {
               debugPrint("verification id error");
               loading = false;
+              isShowOtpField = false;
             } else {
               codeVerificationId = verificationId;
               loading = false;
+              isShowOtpField = true;
               commonToast(
                   msg: "Code send to : ${AuthController.to.phone.text}");
               if (isResendOtp == false) {
@@ -181,12 +203,14 @@ class OtpController extends GetxController {
           "entered otp is ${first.text + second.text + third.text + fourth.text + fifth.text + sixth.text}");
       final AuthCredential credential = PhoneAuthProvider.credential(
         verificationId: codeVerificationId,
-        smsCode: first.text +
-            second.text +
-            third.text +
-            fourth.text +
-            fifth.text +
-            sixth.text,
+        smsCode: isRegister == true
+            ? AuthController.to.registerOtp.text
+            : first.text +
+                second.text +
+                third.text +
+                fourth.text +
+                fifth.text +
+                sixth.text,
       );
       final UserCredential user = await auth.signInWithCredential(credential);
 

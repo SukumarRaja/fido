@@ -7,6 +7,7 @@ import 'package:fido/app/ui/widgets/common/loading.dart';
 import 'package:fido/app/ui/widgets/common/text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../controller/otp.dart';
 import '../themes/curve/main_curve.dart';
 import '../widgets/intl_phone_field.dart';
 import '../widgets/main_clip_path.dart';
@@ -120,7 +121,7 @@ class Login extends StatelessWidget {
         const SizedBox(height: 50.0),
         CommonTextFormField(
           hintText: "Enter name",
-          controller: AuthController.to.lEmail,
+          controller: AuthController.to.name,
           validator: (data) {
             if (data == null || data.isEmpty || data == "") {
               return "Please enter name";
@@ -130,7 +131,7 @@ class Login extends StatelessWidget {
         ),
         CommonTextFormField(
           hintText: "Enter email",
-          controller: AuthController.to.lPassword,
+          controller: AuthController.to.email,
           validator: (data) {
             if (data == null || data.isEmpty || data == "") {
               return "Please enter email";
@@ -143,9 +144,16 @@ class Login extends StatelessWidget {
           child: IntlPhoneField(
             maxLength: 10,
             hintText: "Phone",
-            controller: AuthController.to.lPassword,
+            controller: AuthController.to.phone,
             initialCountryCode: "IN",
             fontFamily: "medium",
+            onChanged: (data) {
+              if (data.toString().length == 10) {
+                AuthController.to.phoneNumberLength = 10;
+              } else {
+                AuthController.to.phoneNumberLength = 0;
+              }
+            },
             validator: (data) {
               if (data!.isEmpty || data == "") {
                 return "Phone field required";
@@ -156,9 +164,68 @@ class Login extends StatelessWidget {
             },
           ),
         ),
+        Obx(
+          () => AuthController.to.phoneNumberLength == 10
+              ? Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 8.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        OtpController.to.sendOtp(isRegister: true);
+                      },
+                      child: CommonText(
+                        text: "Send OTP",
+                        style: regularText(
+                          color: AppColors.primary,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              : SizedBox(),
+        ),
+        Obx(
+          () => AuthController.to.phoneNumberLength == 10 &&
+                  OtpController.to.isShowOtpField == true
+              ? CommonTextFormField(
+                  hintText: "Enter OTP",
+                  controller: AuthController.to.registerOtp,
+                  validator: (data) {
+                    if (data == null || data.isEmpty || data == "") {
+                      return "Please enter OTP";
+                    } else if (data.length < 6) {
+                      return "OTP must have 6 characters";
+                    }
+                    return null;
+                  },
+                )
+              : SizedBox(),
+        ),
+        Obx(
+          () => OtpController.to.isShowOtpField == true
+              ? Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 8.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        OtpController.to.verifyOtp(isRegister: true);
+                      },
+                      child: CommonText(
+                        text: "Verify OTP",
+                        style: regularText(
+                          color: AppColors.primary,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              : SizedBox(),
+        ),
         CommonTextFormField(
           hintText: "Enter password",
-          controller: AuthController.to.lEmail,
+          controller: AuthController.to.password,
           obscureText: true,
           validator: (data) {
             if (data == null || data.isEmpty || data == "") {
