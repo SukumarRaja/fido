@@ -25,6 +25,7 @@ class AuthController extends GetxController {
   final TextEditingController name = TextEditingController();
   final TextEditingController email = TextEditingController();
   final TextEditingController phone = TextEditingController();
+  final TextEditingController registerOtp = TextEditingController();
   final TextEditingController password = TextEditingController();
 
   //verify email
@@ -33,6 +34,15 @@ class AuthController extends GetxController {
   //reset password
   final TextEditingController uPassword = TextEditingController();
   final TextEditingController cuPassword = TextEditingController();
+
+
+  final _phoneNumberLength=0.obs;
+
+  get phoneNumberLength => _phoneNumberLength.value;
+
+  set phoneNumberLength(value) {
+    _phoneNumberLength.value = value;
+  }
 
   final _isLogin = true.obs;
 
@@ -80,22 +90,20 @@ class AuthController extends GetxController {
     logoutLoading = true;
     SharedPreferences pref = await SharedPreferences.getInstance();
     var token = pref.getString('token');
-    Future.delayed(const Duration(seconds: 2), () {
-      if (token != null && token.isNotEmpty) {
-        if (token == "token") {
+    Future.delayed(
+      const Duration(seconds: 2),
+      () {
+        if (token != null && token.isNotEmpty) {
           pref.remove('token');
           Get.off(() => const Initial());
           logoutLoading = false;
           commonToast(msg: "Logout Success");
         } else {
           logoutLoading = false;
-          commonToast(msg: "Logout Failed");
+          commonToast(msg: "No token saved, can't logout");
         }
-      } else {
-        logoutLoading = false;
-        commonToast(msg: "No token saved, can't logout");
-      }
-    });
+      },
+    );
   }
 
   checkOnBoarding() async {
@@ -180,7 +188,7 @@ class AuthController extends GetxController {
         loginLoading = false;
         debugPrint("Login Successfully");
         // var body = {'token': res['token']};
-        var body = {'token': 'token'};
+        var body = {'token': res['user_id']};
         commonToast(msg: "${res['message']}");
         Get.toNamed('/homeMain');
 

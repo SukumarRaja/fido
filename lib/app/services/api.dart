@@ -9,8 +9,8 @@ class ApiService {
   static const resetPassword = "${AppConfig.baseUrl}register";
 
   //profile
-  static const getProfile = "${AppConfig.baseUrl}getProfile";
-  static const updateProfile = "${AppConfig.baseUrl}updateProfile";
+  static const getProfile = "${AppConfig.baseUrl}getprofile=";
+  static const updateProfile = "${AppConfig.baseUrl}action=updateprofile";
   static const getAddress = "${AppConfig.baseUrl}getAddress";
   static const addAddress = "${AppConfig.baseUrl}getAddress";
   static const removeAddress = "${AppConfig.baseUrl}removeAddress";

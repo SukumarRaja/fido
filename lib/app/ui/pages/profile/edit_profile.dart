@@ -1,12 +1,13 @@
 import 'package:fido/app/controller/pet.dart';
 import 'package:fido/app/controller/profile.dart';
+import 'package:fido/app/ui/pages/profile/profile.dart';
 import 'package:fido/app/ui/themes/colors.dart';
 import 'package:fido/app/ui/themes/curve/profile_curve.dart';
 import 'package:fido/app/ui/themes/font_size.dart';
 import 'package:fido/app/ui/widgets/common/button.dart';
 import 'package:fido/app/ui/widgets/common/common_popup.dart';
-import 'package:fido/app/ui/widgets/common/common_textform.dart';
 import 'package:fido/app/ui/widgets/common/text.dart';
+import 'package:fido/app/ui/widgets/common/toast.dart';
 import 'package:fido/app/ui/widgets/profile/profile_textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -88,11 +89,11 @@ class EditProfilePage extends StatelessWidget {
                             ),
                           ),
                           CommonText(
-                            text: "Name",
+                            text: ProfileController.to.getProfileDetails.name,
                             style: boldText(),
                           ),
                           CommonText(
-                            text: "Name",
+                            text: ProfileController.to.getProfileDetails.email,
                             style: mediumText(),
                           ),
                         ],
@@ -139,37 +140,78 @@ class EditProfilePage extends StatelessWidget {
                 hintText: "Owner Name",
                 controller: ProfileController.to.ownerName,
                 icon: Icons.edit,
+                onChanged: (data) {
+                  print("Name Change is $data");
+                  if (data != ProfileController.to.getProfileDetails.name) {
+                    ProfileController.to.isProfileDetailsChanged = true;
+                  } else {
+                    ProfileController.to.isProfileDetailsChanged = false;
+                  }
+                },
               ),
               ProfileTextFormField(
                 hintText: "Email",
+                isEnabled: false,
                 controller: ProfileController.to.email,
-                icon: Icons.edit,
+                icon: null,
+
               ),
               ProfileTextFormField(
                 hintText: "Phone",
                 controller: ProfileController.to.phone,
                 icon: Icons.edit,
+                onChanged: (data) {
+                  print("DATA is $data");
+                  if (data != ProfileController.to.getProfileDetails.phone) {
+                    ProfileController.to.isProfileDetailsChanged = true;
+                  } else {
+                    ProfileController.to.isProfileDetailsChanged = false;
+                  }
+                },
               ),
               ProfileTextFormField(
                 hintText: "Location",
                 controller: ProfileController.to.location,
                 icon: Icons.location_on_outlined,
-                isEnabled: false,
-                suffixOnTap: () {
-                  petPopupMenu(context);
-                  print("Enabled");
+                onChanged: (data) {
+                  print("Location change is $data");
+                  if (data != ProfileController.to.getProfileDetails.location) {
+                    ProfileController.to.isProfileDetailsChanged = true;
+                  } else {
+                    ProfileController.to.isProfileDetailsChanged = false;
+                  }
                 },
+                // isEnabled: false,
+                // suffixOnTap: () {
+                //   // petPopupMenu(context);
+                //   print("Enabled");
+                // },
               ),
               ProfileTextFormField(
                 hintText: "Language",
-                controller: ProfileController.to.phone,
+                controller: ProfileController.to.language,
                 icon: Icons.edit,
+                onChanged: (data) {
+                  print("Language change is $data");
+                  if (data != ProfileController.to.getProfileDetails.language) {
+                    ProfileController.to.isProfileDetailsChanged = true;
+                  } else {
+                    ProfileController.to.isProfileDetailsChanged = false;
+                  }
+                },
               ),
               SizedBox(height: 40),
               CommonButton(
                 text: "Save",
                 onTap: () {
-                  Get.back();
+                  if (ProfileController.to.isProfileDetailsChanged == true) {
+                    print("Profile details changed");
+                    ProfileController.to.updateProfile();
+                  } else {
+                    print("Profile details not changed");
+                    commonToast(msg: "No changed made");
+                  }
+
                 },
               ),
             ],

@@ -10,7 +10,7 @@ class IntlPhoneField extends StatefulWidget {
   final VoidCallback? onTap;
   final bool readOnly;
   final FormFieldSetter<PhoneNumber>? onSaved;
-  final ValueChanged<PhoneNumber>? onChanged;
+  final ValueChanged<String>? onChanged;
   final ValueChanged<PhoneNumber>? onCountryChanged;
   final VoidCallback? onEditingComplete;
   final FormFieldValidator<String>? validator;
@@ -256,6 +256,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
             ),
             Expanded(
               child: TextFormField(
+                onChanged: widget.onChanged,
                 style: TextStyle(fontFamily: widget.fontFamily, fontSize: 14),
                 keyboardType: TextInputType.number,
                 controller: widget.controller,
