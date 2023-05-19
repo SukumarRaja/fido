@@ -23,6 +23,7 @@ class AppointmentTimeCard extends StatelessWidget {
       onTap: onTap,
       child: Obx(
         () => Container(
+          alignment: Alignment.center,
           padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
