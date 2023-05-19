@@ -112,32 +112,13 @@ class Addresses extends StatelessWidget {
                         ));
                   }),
               Container(
-                padding: EdgeInsets.all(10.0),
-                margin: EdgeInsets.all(10.0),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    color: AppColors.grey.withOpacity(.2),
-                    boxShadow: [
-                      BoxShadow(
-                          color: AppColors.shoppingMenu.withOpacity(.3),
-                          blurRadius: 1,
-                          spreadRadius: 1)
-                    ]),
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Icon(
-                    Icons.my_location_outlined,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  CommonText(text: "Use Current Location", style: regularText())
-                ]),
-              ),
-              Container(
-                  margin: EdgeInsets.only(top: 15),
+                  margin: const EdgeInsets.only(top: 15),
                   alignment: Alignment.center,
-                  child: CommonButton(text: "Add Another", onTap: () {}))
+                  child: CommonButton(
+                      text: "Add Another",
+                      onTap: () {
+                        Get.toNamed('/add_address');
+                      }))
             ],
           ),
         ),

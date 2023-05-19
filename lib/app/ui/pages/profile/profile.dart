@@ -16,6 +16,7 @@ import '../../widgets/common/alert.dart';
 import '../../widgets/common/load.dart';
 import '../../widgets/common/text.dart';
 import '../../widgets/main_clip_path.dart';
+import '../matching.dart';
 import '../stylist/stylist_list.dart';
 
 class Profile extends StatelessWidget {
@@ -262,7 +263,9 @@ class Profile extends StatelessWidget {
                             value: false,
                             onChanged: (bool value) {},
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(() => Matching());
+                          },
                         ),
                         SizedBox(height: 5),
                         ProfileMenuTile(

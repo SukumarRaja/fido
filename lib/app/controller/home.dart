@@ -1,13 +1,17 @@
 import 'dart:async';
 
+import 'package:fido/app/controller/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_geocoder/geocoder.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'dart:ui' as ui;
-int statusCode=0;
+
+int statusCode = 0;
+
 class HomeController extends GetxController {
   static HomeController get to => Get.put(HomeController());
   GoogleMapController? mapController;
@@ -72,6 +76,22 @@ class HomeController extends GetxController {
 
   set heading(value) {
     _heading.value = value;
+  }
+
+  final _currentAddress = "".obs;
+
+  get currentAddress => _currentAddress.value;
+
+  set currentAddress(value) {
+    _currentAddress.value = value;
+  }
+
+  final _getCurrentAddressLoading = false.obs;
+
+  get getCurrentAddressLoading => _getCurrentAddressLoading.value;
+
+  set getCurrentAddressLoading(value) {
+    _getCurrentAddressLoading.value = value;
   }
 
   void mapCreation(GoogleMapController controller) {
@@ -184,5 +204,46 @@ class HomeController extends GetxController {
     return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
         .buffer
         .asUint8List();
+  }
+
+  Future<Map?> getCurrentAddress({required bool isAddAddress}) async {
+    getCurrentAddressLoading = true;
+    Location location = Location();
+    try {
+      Future.delayed(const Duration(seconds: 2), () async {
+        getCurrentAddressLoading = false;
+        await location.serviceEnabled().then((value) async {
+          if (value != false) {
+            await location.requestService();
+          }
+        });
+        var coordinates = await location.getLocation();
+
+        var obj = {};
+        var coordinate =
+            Coordinates(coordinates.latitude, coordinates.longitude);
+        var result =
+            await Geocoder.local.findAddressesFromCoordinates(coordinate);
+        currentAddress =
+            "${result.first.subLocality}, ${result.first.locality}, ${result.first.countryName}";
+        if (isAddAddress == true) {
+          ProfileController.to.addAddress1.text = result.first.subLocality!;
+          // ProfileController.to.addAddress2.text = result.first.subAdminArea!;
+          ProfileController.to.addCity.text = result.first.locality!;
+          ProfileController.to.addState.text = result.first.adminArea!;
+          ProfileController.to.addPincode.text = result.first.postalCode!;
+        }
+        debugPrint("current address is $currentAddress");
+        obj['PlaceName'] = currentAddress;
+        obj['latitude'] = coordinates.latitude;
+        obj['longitude'] = coordinates.longitude;
+        debugPrint("object of address is $obj");
+        return obj;
+      });
+    } catch (e) {
+      getCurrentAddressLoading = false;
+      debugPrint("Error from get location coordinates $e");
+    }
+    return null;
   }
 }

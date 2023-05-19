@@ -1,14 +1,15 @@
-import 'package:fido/app/ui/widgets/common/toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../data/model/profile.dart';
 import '../data/repository/profile.dart';
+import '../ui/widgets/common/toast.dart';
 
 class ProfileController extends GetxController {
   static ProfileController get to => Get.put(ProfileController());
   final repository = ProfileRepository();
+
+  final addAddressFormKey = GlobalKey<FormState>();
 
   final TextEditingController ownerName = TextEditingController();
   final TextEditingController email = TextEditingController();
@@ -16,14 +17,23 @@ class ProfileController extends GetxController {
   final TextEditingController location = TextEditingController();
   final TextEditingController language = TextEditingController();
 
-  //address
+  //address edit
   final TextEditingController address1 = TextEditingController();
   final TextEditingController address2 = TextEditingController();
   final TextEditingController city = TextEditingController();
   final TextEditingController pincode = TextEditingController();
   final TextEditingController state = TextEditingController();
 
-  var _isProfileDetailsEmpty = false.obs;
+  //address add
+  final TextEditingController addPhone = TextEditingController();
+  final TextEditingController addName = TextEditingController();
+  final TextEditingController addAddress1 = TextEditingController();
+  final TextEditingController addAddress2 = TextEditingController();
+  final TextEditingController addCity = TextEditingController();
+  final TextEditingController addPincode = TextEditingController();
+  final TextEditingController addState = TextEditingController();
+
+  final _isProfileDetailsEmpty = false.obs;
 
   get isProfileDetailsEmpty => _isProfileDetailsEmpty.value;
 
@@ -31,7 +41,7 @@ class ProfileController extends GetxController {
     _isProfileDetailsEmpty.value = value;
   }
 
-  var _isProfileDetailsChanged = false.obs;
+  final _isProfileDetailsChanged = false.obs;
 
   get isProfileDetailsChanged => _isProfileDetailsChanged.value;
 
@@ -39,7 +49,7 @@ class ProfileController extends GetxController {
     _isProfileDetailsChanged.value = value;
   }
 
-  var _getProfileLoading = false.obs;
+  final _getProfileLoading = false.obs;
 
   get getProfileLoading => _getProfileLoading.value;
 
@@ -47,7 +57,7 @@ class ProfileController extends GetxController {
     _getProfileLoading.value = value;
   }
 
-  var _updateProfileLoading = false.obs;
+  final _updateProfileLoading = false.obs;
 
   get updateProfileLoading => _updateProfileLoading.value;
 
@@ -55,12 +65,28 @@ class ProfileController extends GetxController {
     _updateProfileLoading.value = value;
   }
 
-  var _getProfileDetails = Data().obs;
+  final _getProfileDetails = Data().obs;
 
   get getProfileDetails => _getProfileDetails.value;
 
   set getProfileDetails(value) {
     _getProfileDetails.value = value;
+  }
+
+  final _typeofAddressIndex = 2.obs;
+
+  get typeofAddressIndex => _typeofAddressIndex.value;
+
+  set typeofAddressIndex(value) {
+    _typeofAddressIndex.value = value;
+  }
+
+  final _typeofAddress = "".obs;
+
+  get typeofAddress => _typeofAddress.value;
+
+  set typeofAddress(value) {
+    _typeofAddress.value = value;
   }
 
   getProfile() async {
@@ -129,5 +155,17 @@ class ProfileController extends GetxController {
     phone.text = getProfileDetails.phone;
     location.text = getProfileDetails.location;
     language.text = getProfileDetails.language;
+  }
+
+  clearAddAddressFields() {
+    addPincode.text = "";
+    addPhone.text = "";
+    addName.text = "";
+    addAddress1.text = "";
+    addAddress2.text = "";
+    addCity.text = "";
+    addState.text = "";
+    typeofAddress = "";
+    typeofAddressIndex = 2;
   }
 }
