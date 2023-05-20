@@ -16,7 +16,7 @@ import '../../widgets/common/alert.dart';
 import '../../widgets/common/load.dart';
 import '../../widgets/common/text.dart';
 import '../../widgets/main_clip_path.dart';
-import '../matching.dart';
+import '../matching/matching.dart';
 import '../stylist/stylist_list.dart';
 
 class Profile extends StatelessWidget {
@@ -254,19 +254,19 @@ class Profile extends StatelessWidget {
                           text: "More",
                           style: boldText(fontSize: 14),
                         ),
-                        SizedBox(height: 10),
-                        ProfileMenuTile(
-                          icon: Icons.dark_mode_outlined,
-                          text: "My Address",
-                          isIconWidget: true,
-                          widget: Switch(
-                            value: false,
-                            onChanged: (bool value) {},
-                          ),
-                          onTap: () {
-                            Get.to(() => Matching());
-                          },
-                        ),
+                        // SizedBox(height: 10),
+                        // ProfileMenuTile(
+                        //   icon: Icons.dark_mode_outlined,
+                        //   text: "My Address",
+                        //   isIconWidget: true,
+                        //   widget: Switch(
+                        //     value: false,
+                        //     onChanged: (bool value) {},
+                        //   ),
+                        //   onTap: () {
+                        //     Get.toNamed('/matching_pets');
+                        //   },
+                        // ),
                         SizedBox(height: 5),
                         ProfileMenuTile(
                           endIconColor: AppColors.white,

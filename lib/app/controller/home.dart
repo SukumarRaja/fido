@@ -19,6 +19,10 @@ class HomeController extends GetxController {
 
   dynamic center;
   dynamic pinLocationIcon;
+  dynamic hos;
+  dynamic match;
+  dynamic shop;
+  dynamic style;
 
   final TextEditingController searchController = TextEditingController();
 
@@ -115,7 +119,16 @@ class HomeController extends GetxController {
     } else if (permission == PermissionStatus.granted ||
         permission == PermissionStatus.grantedLimited) {
       final Uint8List markerIcon =
-          await getBytesFromAsset('assets/images/logo.png', 50);
+          await getBytesFromAsset('assets/images/logo.png', 55);
+      final Uint8List hospital =
+          await getBytesFromAsset('assets/images/hospital.png', 50);
+      final Uint8List matching =
+          await getBytesFromAsset('assets/images/matching.png', 80);
+      final Uint8List shopping =
+          await getBytesFromAsset('assets/images/shopping.png', 50);
+      final Uint8List stylist =
+          await getBytesFromAsset('assets/images/stylist.png', 50);
+
       locationDenied = false;
       print("center first is $center");
       if (center == null) {
@@ -138,6 +151,10 @@ class HomeController extends GetxController {
         }
       }
       pinLocationIcon = BitmapDescriptor.fromBytes(markerIcon);
+      hos = BitmapDescriptor.fromBytes(hospital);
+      match = BitmapDescriptor.fromBytes(matching);
+      shop = BitmapDescriptor.fromBytes(shopping);
+      style = BitmapDescriptor.fromBytes(stylist);
     }
     if (marker.isEmpty) {
       marker = [
@@ -151,8 +168,56 @@ class HomeController extends GetxController {
                 title: "Hi",
                 snippet: "kjhlkjhkjhk",
                 onTap: () {
-                  print("kjhkjlhkjhlkj");
-                }))
+                  Get.toNamed('/matching_pets');
+                })),
+        // Marker(
+        //     markerId: const MarkerId('2'),
+        //     rotation: heading,
+        //     position: LatLng(-12.0063258, -76.9513407),
+        //     icon: hos,
+        //     anchor: const Offset(0.5, 0.5),
+        //     infoWindow: InfoWindow(
+        //         title: "Hospitals",
+        //         snippet: "care your pets",
+        //         onTap: () {
+        //           Get.toNamed('/matching_pets');
+        //         })),
+        Marker(
+            markerId: const MarkerId('3'),
+            // rotation: heading,
+            position: LatLng(11.0064258, 76.9516415),
+            icon: match,
+            anchor: const Offset(0.5, 0.5),
+            infoWindow: InfoWindow(
+                title: "Matching",
+                snippet: "Let's matching your pet",
+                onTap: () {
+                  Get.toNamed('/matching_pets');
+                })),
+        // Marker(
+        //     markerId: const MarkerId('4'),
+        //     rotation: heading,
+        //     position: LatLng(14.0063258,78.9513407),
+        //     icon: shop,
+        //     anchor: const Offset(0.5, 0.5),
+        //     infoWindow: InfoWindow(
+        //         title: "Shopping",
+        //         snippet: "Shop your pet foods and grooms",
+        //         onTap: () {
+        //           Get.toNamed('/matching_pets');
+        //         })),
+        // Marker(
+        //     markerId: const MarkerId('5'),
+        //     rotation: heading,
+        //     position:LatLng(11.0063258,76.9513407),
+        //     icon: style,
+        //     anchor: const Offset(0.5, 0.5),
+        //     infoWindow: InfoWindow(
+        //         title: "Stylist",
+        //         snippet: "Find your best stylist",
+        //         onTap: () {
+        //           Get.toNamed('/matching_pets');
+        //         })),
       ];
     }
     isLoading = false;

@@ -6,6 +6,8 @@ import '../ui/pages/home/home.dart';
 import '../ui/pages/home/main.dart';
 import '../ui/pages/login.dart';
 import '../ui/pages/initial.dart';
+import '../ui/pages/matching/matching_pets_list.dart';
+import '../ui/pages/matching/pet_details.dart';
 import '../ui/pages/my_orders.dart';
 import '../ui/pages/password/forgot.dart';
 import '../ui/pages/password/reset.dart';
@@ -72,6 +74,16 @@ class AppRoutes {
     GetPage(
         name: '/add_address',
         page: () => const AddAddress(),
+        transition: Transition.circularReveal,
+        transitionDuration: const Duration(seconds: 1)),
+    GetPage(
+        name: '/matching_pets',
+        page: () => const MatchingPetList(),
+        transition: Transition.circularReveal,
+        transitionDuration: const Duration(seconds: 1)),
+    GetPage(
+        name: '/matching_pet_detail',
+        page: () => const MatchingPetDetail(),
         transition: Transition.circularReveal,
         transitionDuration: const Duration(seconds: 1)),
   ];
