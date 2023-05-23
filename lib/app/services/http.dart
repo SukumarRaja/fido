@@ -1,10 +1,10 @@
+// ignore_for_file: depend_on_referenced_packages
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../controller/home.dart';
-
 
 class HttpHelper {
   Future<dynamic> get(
@@ -53,7 +53,8 @@ class HttpHelper {
         print("Passing Url: $url, Passing Headers $hd");
       }
       var response = await http
-          .post(Uri.parse(url), body: body, headers: hd)
+          .post(Uri.parse(url),
+              body: body, headers: hd, encoding: Encoding.getByName("utf-8"))
           .timeout(const Duration(seconds: 10), onTimeout: () {
         return http.Response("Timeout", 408);
       });
@@ -69,6 +70,58 @@ class HttpHelper {
       if (kDebugMode) {
         print("Error or post request failed on http helper $e");
       }
+    }
+  }
+
+  Future<dynamic> multiPart(
+      {required url,
+      required body,
+      String? image1,
+      String? image2,
+      String? image3,
+      String? image4,
+      String? image1Key,
+      String? image2Key,
+      String? image3Key,
+      String? image4Key,
+      bool auth = false,
+      bool contentHeader = false,
+      bool cors = false}) async {
+    try {
+      var hd = await headers(
+          auth: auth,
+          contentHeader: contentHeader,
+          cors: cors,
+          isMultipart: true);
+      var request = http.MultipartRequest('POST', Uri.parse(url));
+      debugPrint("Passing Url: $url, Passing Headers $hd");
+      request.headers.addAll(hd);
+
+      if (image1 != null || image1 != "") {
+        final file = await http.MultipartFile.fromPath('$image1Key', image1!);
+        request.files.add(file);
+      } else if (image2 != null || image2 != "") {
+        final file = await http.MultipartFile.fromPath('$image2Key', image2!);
+        request.files.add(file);
+      } else if (image3 != null || image3 != "") {
+        final file = await http.MultipartFile.fromPath('$image3Key', image3!);
+        request.files.add(file);
+      } else if (image4 != null || image4 != "") {
+        final file = await http.MultipartFile.fromPath('$image4Key', image4!);
+        request.files.add(file);
+      }
+      if (body != null) {
+        request.fields[body['key']] = body['value'];
+      }
+      //send
+      var response = await request.send();
+      debugPrint("Status Code On Http Server: ${response.statusCode}");
+      var res = await http.Response.fromStream(response);
+      debugPrint("Body On Http Server: ${res.body}");
+      var jsonResponse = returnResponse(res);
+      return jsonResponse;
+    } catch (e) {
+      debugPrint("Error from server on $e");
     }
   }
 
@@ -127,10 +180,20 @@ class HttpHelper {
     }
   }
 
-  headers({auth, contentHeader, cors}) async {
-    Map<String, String> headers = {
-      HttpHeaders.acceptHeader: "application/json"
-    };
+  headers({auth, contentHeader, cors, isMultipart}) async {
+    Map<String, String> headers;
+    if (isMultipart == true) {
+      headers = {
+        HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+        HttpHeaders.cacheControlHeader: 'no-cache',
+        HttpHeaders.acceptHeader: 'application/json; charset=utf-8',
+        'Access-Control-Allow-Headers': '*',
+        'Access-Control-Allow-Origin': '*',
+      };
+    } else {
+      headers = {HttpHeaders.acceptHeader: "application/json"};
+    }
+
     var contentHeaders = {HttpHeaders.contentTypeHeader: "application/json"};
     var corsHeader = {HttpHeaders.accessControlAllowOriginHeader: "*"};
     var corsHeaderTwo = {
